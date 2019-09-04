@@ -15,19 +15,20 @@ class userDAO {
 
         $input['email'] = filter_input(INPUT_POST, 'signup_email', FILTER_VALIDATE_EMAIL);
         if(is_null($input['email']) || ($input['email'] === false)){
-            $errors['email'] = 'Email format must contain @';
+            $errors['email'] = 'Email format must contain \'@\'.';
         }
 
         if($user_passwd === $user_passwd_check) {
             $input['passwd'] = $user_passwd;
-        } else { $errors['passwd'] = 'Password is Invalid'; }
+            if($user_passwd == ''){ $errors['passwd'] = 'Enter the password you want.'; }
+        } else { $errors['passwd'] = 'Password is Invalid.'; }
 
         if(strlen(trim($user_name)) == 0) {
-            $errors['name'] = 'Enter your name';
+            $errors['name'] = 'Enter your name.';
         }else { $input['name'] = $user_name; }
 
-        if(is_null($user_birth)) {
-            $errors['birth'] = 'Error on your birth';
+        if($user_birth == null) {
+            $errors['birth'] = 'Error on your birth.';
         }else { $input['birth'] = $user_birth; }
 
         return array($input, $errors);

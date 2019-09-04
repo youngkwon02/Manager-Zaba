@@ -35,9 +35,26 @@ var send_form = function() {
             console.log(data);
             var parsedData = JSON.parse(data);
             if(parsedData.isSuccess === 1) {
-                alert('Sign up Success');
+                sign_up();
             } else {
-                alert('Sign up Fail!');
+                // var error = parsedData.email_error+parsedData.passwd_error+parsedData.name_error+parsedData.birth_error;
+                var error = '';
+                if(parsedData.email_error != '\n'){
+                    error += "- "+parsedData.email_error;
+                }
+                if(parsedData.passwd_error != '\n'){
+                    error += "- "+parsedData.passwd_error;
+                }
+                if(parsedData.name_error != '\n'){
+                    error += "- "+parsedData.name_error;
+                }
+                if(parsedData.birth_error != '\n'){
+                    error += "- "+parsedData.birth_error;
+                }
+                if(error != '') {
+                    error = error.substr(0, error.length-1);
+                }
+                alert(error);
             }
         }
     })
