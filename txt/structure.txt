@@ -1,0 +1,7 @@
+index.php에서 sign-in이나 main등의 page로 redirection
+Member info에 대한 class : userDAO
+
+DB
+    username : 
+    dbname : Project_Unknown
+    tablename : user_info( user_seq, user_email, user_passwd, user_name, user_birth )

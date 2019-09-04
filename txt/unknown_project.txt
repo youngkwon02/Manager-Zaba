@@ -1,0 +1,24 @@
+
+Project name : unknown...
+
+Why? : 그냥 무엇인가 만들고 싶어서..
+
+구성 : 
+
+    우선 첫 화면에서 정말 Simple하게 Sign-up, Sign-in function만을 포함하여 구성
+    Background Image를 관심을 끌만하게 Changing image로 구현해볼까?
+    
+    Sign-in을 하면 조금 화려하게 나오는 Main page
+    nav에는 친구 추가 기능 및 로그아웃, 간단한 메신저?, ...
+
+    첫번째로는 Notification으로 확실하게 인지시켜주는 기능? (like TODO.txt)
+    -> 조그마한 버튼을 눌러서 날짜 지정 및 Todo Thing 입력 및 추가
+    
+    두번째로는 단순 메모장?..
+
+    세번째로는 '일정공유기능'
+    원하는 사람들과 친구맺기를 통해 친구가 될 수 있고, 원하는 일정을 친구들과 공유가능.
+
+   
+
+

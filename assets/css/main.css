@@ -1,0 +1,147 @@
+body {
+    animation-name: change_bg;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+
+#Welcome_Message {
+    color: white;
+    opacity: 0.8;
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    font-style: italic;
+}
+
+#div_signin_form {
+    position: absolute;
+    top: 45%;
+    left: 15%;
+}
+
+#div_signup_form {
+    width: 350px;
+    height: 450px;
+    background-color: white;
+    display: none;
+    position: absolute;
+    left: 35%;
+    top: 20%;
+}
+
+#div_signup_form>h2 {
+    font-size: 2em;
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: -5px;
+}
+
+#signup_form {
+    /* same with upper h2 tag */
+    margin-left: 30px;
+    font-size: 15px;
+    margin-bottom: -15px;
+}
+
+.signup_input {
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+#signup_name {
+    width: 80px;
+    height: 23px;
+}
+
+#signup_email {
+    width: 200px;
+    height: 23px;
+}
+
+#signup_password {
+    width: 150px;
+    height: 23px;
+}
+#signup_password_check {
+    width: 150px;
+    height: 23px;
+}
+
+.signin_form {
+    width: 210px;
+    height: 30px;
+    margin-bottom: 5px;
+    border-color: rgba(178, 189, 183, 0.5);
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 7px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    font-weight: bolder;
+    padding-left: 15px;
+    margin-right: 15px;
+    overflow: hidden; /* For background-color when apply border radius */
+}
+
+#signin_submit {
+    background-color: rgba(62, 170, 233, 0.9);
+    border: none;
+    border-radius: 10px;
+    width: 70px;
+    height: 30px;
+}
+
+#sign_up {
+    color: red;
+    font-size: 12px;
+    position: absolute;
+    top: 57%;
+    left: 19%;
+}
+
+#sign_up:hover {
+    color: rgb(30, 219, 131);
+    cursor: pointer;
+}
+
+#sign_board {
+    display: block;
+}
+
+#signup_submit {
+    background-color: rgb(11, 177, 33);
+    width: 90%;
+    height: 30px;
+    border: none;
+    color: rgb(255, 255, 255);
+}
+
+#signup_cancel {
+    background-color: rgb(228, 29, 22);
+    width: 90%;
+    height: 30px;
+    border: none;
+    color: rgb(255, 255, 255);
+}
+
+@keyframes change_bg {
+    0% {
+        background-image: url('../../images/bg01.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    33% {
+        background-image: url('../../images/bg02.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    66% {
+        background-image: url('../../images/bg03.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    100% {
+        background-image: url('../../images/bg01.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
