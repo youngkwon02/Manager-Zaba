@@ -37,24 +37,25 @@ var send_form = function() {
             if(parsedData.isSuccess === 1) {
                 sign_up();
             } else {
-                // var error = parsedData.email_error+parsedData.passwd_error+parsedData.name_error+parsedData.birth_error;
-                var error = '';
-                if(parsedData.email_error != '\n'){
-                    error += "- "+parsedData.email_error;
-                }
-                if(parsedData.passwd_error != '\n'){
-                    error += "- "+parsedData.passwd_error;
+                var arr = document.getElementsByClassName('div_error');
+                for(var i = 0; i<5; i++) {
+                    arr[i].innerHTML = '';
                 }
                 if(parsedData.name_error != '\n'){
-                    error += "- "+parsedData.name_error;
+                    arr[0].innerHTML = parsedData.name_error;
                 }
                 if(parsedData.birth_error != '\n'){
-                    error += "- "+parsedData.birth_error;
+                    arr[1].innerHTML = parsedData.birth_error;
                 }
-                if(error != '') {
-                    error = error.substr(0, error.length-1);
+                if(parsedData.email_error != '\n'){
+                    arr[2].innerHTML = parsedData.email_error;
                 }
-                alert(error);
+                if(parsedData.passwd_error != '\n'){
+                    arr[3].innerHTML = parsedData.passwd_error;
+                }
+                if(parsedData.passwdck_error != '\n'){
+                    arr[4].innerHTML = parsedData.passwdck_error;
+                }
             }
         }
     })

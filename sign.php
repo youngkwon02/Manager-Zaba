@@ -26,16 +26,15 @@
     <div id = "div_signup_form">
         <h2>Sign up</h2><br>  
             <div id = "signup_form">
-                name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;birth<br>
-                <input class = "signup_input" id = "signup_name" type = "text" name = "signup_name" >
-                &nbsp;&nbsp;
+                Name&nbsp;&nbsp;&nbsp;<span class="div_error" style = "color:red; font-size:12px;"></span><br>
+                <input class = "signup_input" id = "signup_name" type = "text" name = "signup_name" ><br>
+                Birth&nbsp;&nbsp;&nbsp;<span class="div_error" style = "color:red; font-size:12px;"></span><br>
                 <input type="date" id = "signup_birth" name = "signup_birth" value = "<?php $date = date("Y-m-d", time()); $str_date = strtotime($date. '-22 years'); echo date("Y-m-d", $str_date);?>"><br>
-                e-mail<br>
+                E-mail&nbsp;&nbsp;&nbsp;<span class="div_error" style = "color:red; font-size:12px;"></span><br>
                 <input class = "signup_input" id = "signup_email" type = "text" name = "signup_email" ><br>
-                password<br>
+                Password&nbsp;&nbsp;&nbsp;<span class="div_error" style = "color:red; font-size:12px;"></span><br>
                 <input class = "signup_input" id = "signup_password" type = "password" name = "signup_password" ><br>
-                password check<br>
+                Password check&nbsp;&nbsp;&nbsp;<span class="div_error" style = "color:red; font-size:12px;"></span><br>
                 <input class = "signup_input" id = "signup_password_check" type = "password" name = "signup_password_check" ><br><br>
                 <input type = "button" id = "signup_submit" value = "Sign up" onclick="send_form()"><br><br>
                 <input type = "button" id = "signup_cancel" value = "Cancel" onclick="sign_up()"><br>

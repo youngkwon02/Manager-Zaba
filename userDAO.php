@@ -21,7 +21,7 @@ class userDAO {
         if($user_passwd === $user_passwd_check) {
             $input['passwd'] = $user_passwd;
             if($user_passwd == ''){ $errors['passwd'] = 'Enter the password you want.'; }
-        } else { $errors['passwd'] = 'Password is Invalid.'; }
+        } else { $errors['passwdck'] = 'Password is Invalid.'; }
 
         if(strlen(trim($user_name)) == 0) {
             $errors['name'] = 'Enter your name.';

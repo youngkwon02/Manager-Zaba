@@ -19,6 +19,9 @@
         if(array_key_exists('passwd', $errors)) {
             $passwd = $errors['passwd'];
         }
+        if(array_key_exists('passwdck', $errors)) {
+            $passwdck = $errors['passwdck'];
+        }
         if(array_key_exists('name', $errors)) {
             $name = $errors['name'];
         }
@@ -32,6 +35,7 @@
     "isSuccess": <?= '"'.$is_success.'\n"' ?>,
     "email_error": <?= '"'.$email.'\n"' ?>,
     "passwd_error": <?= '"'.$passwd.'\n"' ?>,
+    "passwdck_error": <?= '"'.$passwdck.'\n"' ?>,
     "name_error": <?= '"'.$name.'\n"' ?>,
     "birth_error": <?= '"'.$birth.'\n"' ?>
 }
