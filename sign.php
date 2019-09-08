@@ -16,9 +16,9 @@
             <h5>Welcome to Project_Unknown!</h5>
         </div>
         <div id = "div_signin_form">
-            <form method = "POST" action = "">
-                <input class = "signin_form" type = "text" value = 'E-mail' onfocus="this.value = ''" onfocusout = "this.value = 'E-mail'" name = "user_email"><br>
-                <input class = "signin_form" type = "password" value = 'Password' onfocus="this.value = ''" onfocusout = "this.value = 'Password'" name = "user_passwd">
+            <form method = "POST" action = "./signinAction.php">
+                <input class = "signin_form" type = "text" onfocus = "this.value = ''" value = 'E-mail' name = "user_email"><br>
+                <input class = "signin_form" type = "password" onfocus = "this.value = ''" value = 'Password' name = "user_passwd">
                 <input id = "signin_submit" type = "submit" value = "Sign In">
             </form>
         </div>

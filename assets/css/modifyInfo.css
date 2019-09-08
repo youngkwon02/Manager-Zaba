@@ -1,0 +1,80 @@
+body{
+    background-color: rgba(0, 0, 0, .7);
+}
+
+#form {
+    background-image: linear-gradient(to right, #5e42a6, #b74e91);
+    width: 40%;
+    height: 80%;
+    position: absolute;
+    left: 30%;
+    top: 10%;
+    text-align: left;
+}
+
+#back {
+    margin-top: 2%;
+    margin-left: 5%;
+    color: black;
+    font-size: 30px;
+}
+
+#back>a{
+    text-decoration: none;
+    color: black;
+}
+
+#form>h1 {
+    font-style: italic;
+    text-align: center;
+}
+
+
+#form>h3>.input {
+    width: 15em;
+    height: 1.8em;
+    background-color: rgba(255, 255, 255, 1);
+    border-width: 2px;
+    border-color: black;
+    padding-left: 10px;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+#form>h3 {
+    line-height: 1.8em;
+}
+
+#modify_form {
+    padding-top: 1%;
+} 
+
+#modify_form > h3 {
+    padding-left: 14%;
+}
+
+#modify_form > h5 {
+    text-align: center;
+}
+
+#modify_form > h2 {
+    text-align: center;
+    color: blue;
+}
+
+#form>#modify_form>h4 {
+    color: red;
+    line-height: 0.2em;
+    text-align: center;
+}
+
+.apply {
+    margin-top: 0px;
+    margin-left: 43%;
+    background-color: rgb(41, 161, 209);
+    width: 15%;
+    height: 2em;
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+}

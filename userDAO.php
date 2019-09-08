@@ -7,8 +7,8 @@ class userDAO {
    
     function __construct() {
         session_start();
-    }
-    
+    }   
+
     function validate_signForm($user_email, $user_passwd, $user_passwd_check, $user_name, $user_birth) {
         $input = array();
         $errors = array();
@@ -16,6 +16,11 @@ class userDAO {
         $input['email'] = filter_input(INPUT_POST, 'signup_email', FILTER_VALIDATE_EMAIL);
         if(is_null($input['email']) || ($input['email'] === false)){
             $errors['email'] = 'Email format must contain \'@\'.';
+        } else {
+            $existing = $this->check_email_existing($input['email']);
+            if($existing === TRUE) {
+                $errors['email'] = 'Sorry, Entered email existing already.';
+            }
         }
 
         if($user_passwd === $user_passwd_check) {
@@ -36,20 +41,80 @@ class userDAO {
 
     function add_user($user_email, $user_passwd, $user_name, $user_birth) {
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
-        $query = "INSERT INTO user_info (user_email, user_passwd, user_name, user_birth) values ('".$user_email."', '".$user_passwd."', '".$user_name."', '".$user_birth."')";
+        $query = "INSERT INTO user_info (user_email, user_passwd, user_name, user_birth) values ('".$user_email."', MD5('".$user_passwd."'), '".$user_name."', '".$user_birth."')";
         mysqli_query($db_connect, $query);        
     }
 
     function check_email_existing($user_email) {
-
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        // Email Existing을 Check 하는 Query에서 user_seq를 SELECT
+        $query = "SELECT user_seq FROM user_info WHERE user_email = '".$user_email."'";
+        $result = mysqli_query($db_connect, $query);
+        $row = mysqli_fetch_row($result);
+        if($row[0] === null) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
     function login_action($user_email, $user_passwd) {
-
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "SELECT user_email, user_passwd FROM user_info WHERE user_email = '".$user_email."'";
+        $result = mysqli_query($db_connect, $query);
+        $row = mysqli_fetch_assoc($result);
+        $query = "SELECT MD5('".$user_passwd."') FROM user_info";
+        $result = mysqli_query($db_connect, $query);
+        $inpw_md5 = mysqli_fetch_row($result);
+        if($inpw_md5[0] === $row['user_passwd']) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
-    function resave_passwd($user_email, $user_name, $user_birth) {
+    function get_userName($user_email) {
+        // get_userName for Session
+        // call on SigninAction
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "SELECT user_name FROM user_info WHERE user_email = '".$user_email."'";
+        $result = mysqli_query($db_connect, $query);
+        $row = mysqli_fetch_row($result);
+        return $row[0];
+    }
 
+    function get_userEmail($user_name) {
+        // get userEmail for set_nickname parameter
+        // call on homepage, set_nickname method call
+        // maybe $user_name parameter will be $_SESSION['user_name']
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "SELECT user_email FROM user_info WHERE user_name = '".$user_name."'";
+        $result = mysqli_query($db_connect, $query);
+        $row = mysqli_fetch_row($result);
+        return $row[0];
+    }
+
+    function reset_passwd($user_email, $user_name, $new_passwd) {
+        // reset_passwd for 정보수정
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "UPDATE user_info SET user_passwd = MD5('".$new_passwd."') WHERE user_email='".$user_email."' and user_name='".$user_name."'";
+        $result = mysqli_query($db_connect, $query);
+        mysqli_fetch_row($result);    
+    }
+
+    function set_userNick($user_email, $new_nick) {
+        // null이 가능한 user_nick col에 추가
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "UPDATE user_info SET user_nick = '".$new_nick."' WHERE user_email = '".$user_email."'";
+        mysqli_query($db_connect, $query);
+    }
+
+    function get_userNick($user_email) {
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "SELECT user_nick FROM user_info WHERE user_email = '".$user_email."'";
+        $result = mysqli_query($db_connect, $query);
+        $row = mysqli_fetch_row($result);
+        return $row[0];
     }
 }
 

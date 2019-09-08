@@ -32,7 +32,7 @@
     }
 ?>
 {
-    "isSuccess": <?= '"'.$is_success.'\n"' ?>,
+    "isSuccess": <?= $is_success ?>,
     "email_error": <?= '"'.$email.'\n"' ?>,
     "passwd_error": <?= '"'.$passwd.'\n"' ?>,
     "passwdck_error": <?= '"'.$passwdck.'\n"' ?>,

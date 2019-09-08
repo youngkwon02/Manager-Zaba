@@ -34,8 +34,13 @@ var send_form = function() {
             console.log('Ajax: Data_Sended');
             console.log(data);
             var parsedData = JSON.parse(data);
+            // Success Flag = 1일때 Form을 reset, else Form reset 없이 error 출력
             if(parsedData.isSuccess === 1) {
                 sign_up();
+                $("#signup_email").val('');
+                $("#signup_password").val('');
+                $("#signup_password_check").val('');
+                $("#signup_name").val('');
             } else {
                 var arr = document.getElementsByClassName('div_error');
                 for(var i = 0; i<5; i++) {

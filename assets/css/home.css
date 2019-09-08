@@ -1,0 +1,140 @@
+* { background-color: rgba(255,0,0,.2); }
+
+* * { background-color: rgba(0,255,0,.2); }
+
+* * * { background-color: rgba(0,0,255,.2); }
+
+* * * * { background-color: rgba(255,0,255,.2); }
+
+* * * * * { background-color: rgba(0,255,255,.2); }
+
+* * * * * * { background-color: rgba(255,255,0,.2); }
+
+* * * * * * * { background-color: rgba(255,0,0,.2); }
+
+* * * * * * * * { background-color: rgba(0,255,0,.2); }
+
+* * * * * * * * * { background-color: rgba(0,0,255,.2); }
+
+/* ---------------------------------------------- */
+
+body {
+    margin: 0;
+}
+
+#slidebar {
+    width: 100%;
+    top: 0;
+    align-items: center;
+    background-color: #341b72;
+    position: fixed;
+}
+
+#slidebar>.inner {
+    /* For nav bar algin */
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+}
+
+
+#slidebar>.inner>nav>ul {
+    list-style: none;
+    display: flex;
+    height: 3em;
+    line-height: 3em;
+    padding-inline-start: 0;
+}
+
+#slidebar>.inner>nav>ul>li {
+    margin-left: 2em;
+    color: rgba(255, 255, 255, 0.65);
+    /* background-image: linear-gradient(to right, #5e42a6, #b74e91); */
+}
+
+#slidebar>.inner>nav>ul>li:first-child{
+    margin-left: 0;
+}
+
+/* Three bar on slide bar */
+#slidebar>.inner>nav>ul>li:last-child{
+    /* margin-left: 200% */
+    position: absolute;
+    left: 90%;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: rgba(255, 255, 255);
+    margin: 6px 0;
+    transition: .4s;
+    opacity: 1;
+}
+
+.change .bar1 {
+    transform: rotate(-45deg) translate(-7.7px, 6px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.bar1:first-child {
+    margin-top: 10px;
+}
+
+#menuTab {
+    display: none;
+    position: fixed;
+    left: 86%;
+    top: 80px;
+    background-color: white;
+    width: 28%;
+    height: 100%;
+}
+
+#menuTab>ul>li{
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 1em;
+}
+
+#menuTab>ul>li>a{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 1em;
+}
+
+#header {
+    margin-top: 80px;
+    display: block;
+    background-color: #5e42a6;
+    background-size: 100% 100%;
+    min-height: calc(100vh - 5em);
+}
+
+#header {
+    justify-content: center;
+    padding-top: 100px;
+}
+
+#header>.inner {
+    padding: 4em 4em 2em 4em;
+}
+
+header>.inner>h1 {
+    color: rgba(255, 255, 255, 1);
+    font-size: 2.7em;
+    /* margin-bottom: 20px; */
+}
+
+header>.inner>p {
+    color: rgba(255, 255, 255, .55);
+    font-size: 1.2em;
+    line-height: 1.75em;
+    margin-bottom: 2em;
+}
