@@ -42,7 +42,7 @@ class userDAO {
     function add_user($user_email, $user_passwd, $user_name, $user_birth) {
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
         $query = "INSERT INTO user_info (user_email, user_passwd, user_name, user_birth) values ('".$user_email."', MD5('".$user_passwd."'), '".$user_name."', '".$user_birth."')";
-        mysqli_query($db_connect, $query);        
+        mysqli_query($db_connect, $query);
     }
 
     function check_email_existing($user_email) {

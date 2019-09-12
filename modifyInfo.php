@@ -20,7 +20,7 @@
 <body>
     <div id="form">
         <div id="back"><a href="./home.php"><<</a></div>
-        <h1>Modify Information Form</h1><br>
+        <h1>Information correction Form</h1><br>
         <form id="modify_form" method="POST" action="./modifyAction.php">
             <h3>Owner : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $userDAO = new userDAO(); echo($userDAO->get_userName($userDAO->get_userEmail($_SESSION['user_name']))) ?></h3>
             <h3>E-mail : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $userDAO = new userDAO(); echo($userDAO->get_userEmail($_SESSION['user_name'])) ?></h3>

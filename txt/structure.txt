@@ -3,6 +3,7 @@ Member info에 대한 class : userDAO
 Sign in과 Sign up에 대한 Action은 각각 SigninAction.php와 SignupAction.php
 
 DB
-    username : 
+    username : PUadmin
     dbname : Project_Unknown
     tablename : user_info( user_seq, user_email, user_passwd, user_name, user_birth )
+                TODO( TODO_seq, user_email, user_name, TODO_content, date )

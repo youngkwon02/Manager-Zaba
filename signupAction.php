@@ -1,12 +1,15 @@
 <?php
     require 'userDAO.php';
+    require 'memoDAO.php';
     $userDAO = new userDAO();
+    $memoDAO = new memoDAO();
     list($input, $errors) = $userDAO->validate_signForm($_POST['signup_email'], $_POST['signup_password'], $_POST['signup_password_check'], $_POST['signup_name'], $_POST['signup_birth']);
     if($errors == null) {
         // Success Flag;
         $is_success = 1;
         // Data to Database;
         $userDAO->add_user($input['email'], $input['passwd'], $input['name'], $input['birth']);
+        $memoDAO->add_memo($input['email'], $input['name'], 'MEMO TITLE', 'Enter your MEMO here :)');
     }else {
         $is_success = -1;
         $email = '';

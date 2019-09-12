@@ -1,4 +1,4 @@
-* { background-color: rgba(255,0,0,.2); }
+/* * { background-color: rgba(255,0,0,.2); }
 
 * * { background-color: rgba(0,255,0,.2); }
 
@@ -14,7 +14,7 @@
 
 * * * * * * * * { background-color: rgba(0,255,0,.2); }
 
-* * * * * * * * * { background-color: rgba(0,0,255,.2); }
+* * * * * * * * * { background-color: rgba(0,0,255,.2); } */
 
 /* ---------------------------------------------- */
 
@@ -103,11 +103,24 @@ body {
     margin-bottom: 1em;
 }
 
+#menuTab>ul>li:first-child {
+    margin-top: 40px;
+}
+
 #menuTab>ul>li>a{
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
     text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: dotted 1px rgba(0, 0, 0, .75);
     color: rgba(0, 0, 0, 0.7);
     margin-bottom: 1em;
 }
+
+#menuTab>ul>li>a:hover {
+    border-bottom: none;
+    color: #4f11ec;
+}
+
 
 #header {
     margin-top: 80px;
@@ -137,4 +150,165 @@ header>.inner>p {
     font-size: 1.2em;
     line-height: 1.75em;
     margin-bottom: 2em;
+}
+
+#todo {
+    display: block;
+    background-size: 100% 100%;
+    min-height: calc(100vh - 12em);
+    background-color: #e475b9;
+    padding-top: 12%;
+    padding-bottom: 4%;
+}
+
+.contentBox>h1 {
+    margin-bottom: 30px;
+}
+
+.contentBox>p {
+    color: rgba(255, 255, 255, .55);
+}
+
+#todo>.inner{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(30, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
+
+#todo>.inner>.contentBox {
+    grid-column-start: 4;
+    grid-column-end: 12;
+    grid-row: 1;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.34);
+    color: rgba(255, 255, 255, 1);
+    padding-top: 2em;
+    padding-left: 2em;
+}
+
+#todoBox {
+    grid-column-start: 16;
+    grid-column-end: 28;
+    grid-row : 1;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.34);
+    color: rgba(255, 255, 255, 1);
+    padding-top: 2em;
+    
+    display: grid;
+    /* 아래부분은 화면이 축소될 때 px단위로 걸어놔서 축소가 안돼서 변경. */
+    grid-template-columns: repeat(10, 1fr);
+    /* grid-template-columns: repeat(10, 56.7px); */
+}
+
+#todoBox>h1 {
+    text-align: center;
+    grid-column-start: 2;
+    grid-column-end: 10;
+}
+
+#todoBox>#addButton {
+    grid-column-start: 2;
+    grid-column-end: 11;
+}
+
+#todoP {
+   line-height: 50px;
+    margin: 0;
+    /* grid에서의 Margin대신 사용할 Property */
+    margin-block-start: 0;
+    margin-block-end: 0;
+    grid-column-start: 2;
+    grid-column-end: 10;
+    
+}
+
+#addButton {
+    text-align:right !important;
+    margin-right:35px;
+}
+
+#memo {
+    display: block;
+    background-size: 100%;
+    min-height: calc(100vh);
+    background-color: #5ece96;
+}
+
+#memo>.inner {
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    padding-top: 170px;
+}
+
+#memo>.inner>.contentBox {
+    grid-column-start: 4;
+    grid-column-end: 12;
+    grid-row: 2;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.34);
+    color: rgba(255, 255, 255, 1);
+    padding-top: 2em;
+    padding-left: 2em;
+}
+
+#memoBox {
+    grid-column-start: 16;
+    grid-column-end: 28;
+    grid-row : 2;
+    background-color: rgba(0, 0, 0, 0.34);
+    color: rgba(255, 255, 255, 1);
+    
+    display: grid;
+    /* 아래부분은 화면이 축소될 때 px단위로 걸어놔서 축소가 안돼서 변경. */
+    grid-template-columns: repeat(10, 1fr);
+    /* grid-template-columns: repeat(10, 56.7px); */
+}
+
+#memoForm {
+    grid-column-start: 1;
+    grid-column-end: 11;
+    text-align: center;
+}
+
+#memoBox>#memoForm>#memoTitle {
+    grid-column-start: 1;
+    grid-column-end: 11;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 1.8em;
+    height: 30px;
+}
+
+#memoBox>#memoForm>#memoText {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 1.2em;
+    grid-column-start: 2;
+    grid-column-end: 10;
+    width: 500px;
+    height: 160px;
+    resize: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#memoBox>#memoForm>#memoSubmit {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 1.2em;
+}
+
+#calendar {
+    display: block;
+    background-size: 100%;
+    min-height: calc(100vh - 5em);
+    background-color: #4c9fee;
 }
