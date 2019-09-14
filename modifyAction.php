@@ -24,7 +24,10 @@
         $userDAO = new userDAO();
         $email = $userDAO->get_userEmail($_SESSION['user_name']);
         $userDAO->set_userNick($email, $nick);
-        $userDAO->reset_passwd($email, $_SESSION['user_name'], $pass);
+        if($pass !== ''){
+            $userDAO->reset_passwd($email, $_SESSION['user_name'], $pass);
+        }
         header('location: modifyInfo.php?success=1');
+        
     }
 ?>

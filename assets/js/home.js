@@ -1,3 +1,26 @@
+$(document).ready(function(){
+    $('#prev_m').click(function(){
+        window.location.href = './calendarAction.php?action=prevM';
+    });
+
+    $('#next_m').click(function(){
+        window.location.href = './calendarAction.php?action=nextM';
+    });
+
+    $('#prev_y').click(function(){
+        window.location.href = './calendarAction.php?action=prevY';
+    });
+
+    $('#next_y').click(function(){
+        window.location.href = './calendarAction.php?action=nextY';
+    });
+
+    $('#today').click(function(){
+        window.location.href = './calendarAction.php?action=reset'
+    });
+
+});
+
 function click_menu(x){
     x.classList.toggle("change");
     var menuTab = document.getElementById('menuTab');
@@ -57,21 +80,4 @@ function resize_todoNote(num) {
     var note = document.getElementById('listTab'); 
     var k = 480 + (num-15)*23.25;
     note.style.height = k+'px';
-}
-
-function save_memo() {
-    var title = document.getElementById('memoTitle');
-    var text = document.getElementById('memoText');
-    $.ajax({
-        url: "saveMemoAction.php",
-        type: "POST",
-        async: false,
-        data: {
-            "done" : 1,
-            "title" : title,
-            "text" : text
-        },
-        success: function(data) {
-        }
-    })
 }

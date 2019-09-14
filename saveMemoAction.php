@@ -12,6 +12,7 @@
     $email = $userDAO->get_userEmail($name);
     $title = $_POST['title'];
     $text = $_POST['text'];
+    $text = str_replace("\r\n", '//', $text);
 
     if(strlen($title)>27) {
         header('location: home.php?memo_Ex=1#memo');    

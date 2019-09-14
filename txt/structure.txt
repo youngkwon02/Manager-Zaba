@@ -7,3 +7,12 @@ DB
     dbname : Project_Unknown
     tablename : user_info( user_seq, user_email, user_passwd, user_name, user_birth )
                 TODO( TODO_seq, user_email, user_name, TODO_content, date )
+
+Calendar
+    $numOfDay, $prevNumOfDay, $nextNumOfDay, $startDayNum 등으로 달력 구성.
+    추가적으로 PHP 기본 제공 함수를 통해 $now_M과 $now_Y를 구해서 달력 생성.
+
+    이제 home에서 Calendar widget을 볼 때, 연도와 월에따른 달력의 변화가 필요.
+    두달 혹은 그 이상의 차이가 나는 시점을 보기 원할 때를 생각하면
+    한번 이상의 reload가 필요하므로, 이는 Ajax을 사용.
+    

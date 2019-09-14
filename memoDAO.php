@@ -30,6 +30,7 @@ class memoDAO {
         $query = "SELECT text FROM MEMO WHERE user_email = '".$user_email."' AND user_name = '".$user_name."' ORDER BY Last_Modified DESC";
         $result = mysqli_query($db_connect, $query);
         $row = mysqli_fetch_array($result);
+        $row[0] = str_replace("//", "\r\n", $row[0]);
         return $row[0];
     }
 

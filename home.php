@@ -15,6 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./assets/js/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/home.js"></script>
     <link rel="stylesheet" href="./assets/css/home.css">
     <title>Home</title>
@@ -94,11 +95,11 @@
             <div class="contentBox">
                 <h1>MEMO</h1>
                 <p>
-                    This is a simple MEMO widget!<br>
-                    It will notify you something every time you sign in.<br><br>
-                    For example, you can write something<br>
-                    that can be easily forgotten such as a plan<br>
-                    to do something!
+                    This is so simple MEMO widget.<br>
+                    Just leave something you must not forget!<br><br>
+                    For example, you can write some phrases<br>
+                    that will make you feel better.<br>
+                    Or you can write a plan to be happy<br>just by thinking!^^
                 </p>
             </div>
             
@@ -124,6 +125,62 @@
 
     <section id="calendar">
         <div class="inner">
+            <div class="contentBox">
+                <h1>CALENDAR</h1>
+                <p>
+                    Make your own calendar with this widget!<br>
+                    You can remind your plan by writing<br>on this calendar.<br><br>
+                    In addition, you can choose and share your calendar with your friends.
+                </p>
+            </div>
+            
+            <div id="calendarBox">
+                <!-- php code for calendar -->
+                <?php require_once './initCalendar.php'; ?>
+
+                <div class="no-drag" id="monthSelect"><span id="prev_m">◀</span><div id="monthValue"><?= $monthArr[$_SESSION['month']] ?></div><span id="next_m">▶</span></div>
+                <div class="no-drag" id="yearSelect"><span id="prev_y">◁</span><div id="yearValue"><?= $yearArr[$_SESSION['year']] ?></div><span id="next_y">▷</span></div>
+                <div class="no-drag" id="today">Today</div><br>
+                <div id="calendarBody">
+                    <!-- 요일 출력 MON ~ SUN -->
+                    <?php
+                        for($i=0; $i<7; $i++) {
+                            if($i == 5){
+                                echo('<div id="Saturday" class="calendarDay">'.$dayArr[$i].'</div>');
+                            }else if($i == 6){
+                                echo('<div id="Sunday" class="calendarDay">'.$dayArr[$i].'</div>');
+                            }else{
+                                echo('<div class="calendarDay">'.$dayArr[$i].'</div>');
+                            }
+                        }
+                    ?>
+                    <!-- 일자 출력 .. 1 ~ 31 ..  -->
+                    <?php 
+                        $day = $prevNumOfDay - $startDayNum;
+                        $element = 'prev';
+                        for($i = 0; $i < 42; $i++) {                            
+                            if($i == $startDayNum) {
+                                $day = 1;
+                                $element = 'this';
+                            }
+                            if($day == $numOfDay + 1){
+                                // day가 32일과 같이 numOfDay +1의 값을 가질 때 1로 Reset
+                                $day = 1;
+                                $element = 'next';
+                            }
+
+                            if($element === 'prev') {
+                                echo('<div class="calendarPrevElement">'.$day.'</div>');
+                            }else if($element === 'this') {
+                                echo('<div class="calendarThisElement">'.$day.'</div>');
+                            }else if($element === 'next') {
+                                echo('<div class="calendarNextElement">'.$day.'</div>');
+                            }                            
+                            $day ++;
+                        }
+                    ?>
+                </div>
+            </div>
         </div>
     </section>
 </body>
