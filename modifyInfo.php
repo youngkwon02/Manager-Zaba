@@ -25,6 +25,7 @@
             <h3>Owner : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $userDAO = new userDAO(); echo($userDAO->get_userName($userDAO->get_userEmail($_SESSION['user_name']))) ?></h3>
             <h3>E-mail : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $userDAO = new userDAO(); echo($userDAO->get_userEmail($_SESSION['user_name'])) ?></h3>
             <h3>Nickname : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input" type="text" value="<?php $userDAO = new userDAO(); echo($userDAO->get_userNick($userDAO->get_userEmail($_SESSION['user_name']))) ?>" name="nick"></h3>
+            <h3>Allow Search for relationship : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;허용 <input type="radio" name="search_YN" value="Y" checked="checked">&nbsp;거부 <input type="radio" name="search_YN" value="N"></h3>
             <h3>Password : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input" type="password" name="pass"></h3>
             <h3>Password Check : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input" type="password" name="passck"></h3>
             <h5>If you don't want to change password, click apply without enter password</h5>

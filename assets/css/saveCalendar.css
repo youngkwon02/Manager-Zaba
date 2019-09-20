@@ -1,0 +1,177 @@
+body {
+    background: rgba(179,220,237,1);
+    background: -moz-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(179,220,237,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(188,224,238,1)));
+    background: -webkit-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: -o-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: -ms-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: linear-gradient(to right, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=1 );
+    
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.text {
+    color: rgba(0, 0, 0, .75);
+    font-weight: bold;
+}
+
+#saveCalendarForm {
+    background-color: rgba(0, 0, 0, .35);
+    width: 500px;
+    height: 450px;;
+    position: absolute;
+    left:450px;
+    top: 120px;
+
+    display: grid;
+    grid-template-rows: repeat(10, 43px);
+    grid-template-columns: repeat(10, 50px);
+}
+
+#saveCalendarForm>a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, .35);
+    padding-left: 20px;
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 5;    
+}
+
+#saveCalendarForm>a:hover {
+    color: rgba(255, 255, 255, .85);
+    transition: color 1s;
+}
+
+.yearSelect {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, .75);
+    font-size: 15px;
+    border: none;
+    height: 22px;
+}
+
+.monthSelect {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, .75);
+    font-size: 15px;
+    border: none;
+    height: 22px;
+}
+
+.daySelect {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, .75);
+    font-size: 15px;
+    border: none;
+    height: 22px;
+}
+
+h2 {
+    grid-row: 3;
+    grid-column-start: 2;
+    grid-column-end: 5;
+    margin: 0;
+    color: rgba(255, 255, 255, .7);
+    border-bottom: 1px rgba(255, 255, 255, .7) solid;
+    border-right: 1px rgba(255, 255, 255, .7) solid;
+}
+
+h2>a {
+    color: rgba(255, 255, 255, .7);
+    text-decoration: none;
+}
+
+#title {
+    grid-row: 5;
+    grid-column-start: 3;
+    grid-column-end: 9;
+}
+
+#title>input {
+    width: 225px;
+    font-size: 14px;
+    height: 24px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    padding-left: 10px;
+    background-color: rgb(142, 225, 250);
+
+}
+
+#start {
+    grid-row: 6;
+    grid-column-start: 3;
+    grid-column-end: 10;
+}
+
+#end {
+    grid-row: 7;
+    grid-column-start: 3;
+    grid-column-end: 10;
+}
+
+#share {
+    grid-row: 8;
+    grid-column-start: 3;
+    grid-column-end: 10;
+}
+
+#color {
+    grid-row: 9;
+    grid-column-start: 3;
+    grid-column-end: 10;
+}
+
+#colorPicker {
+    height: 25px;
+    border: none;
+    padding: 0;
+    width: 240px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#submit {
+    grid-row: 10;
+    grid-column-start: 4;
+    grid-column-end: 8;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(71, 146, 231);
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: color 1s;
+}
+
+#submit:hover {
+    color: rgb(168, 20, 20);
+}
+
+#titleErr {
+    color:red;
+    grid-row: 3;
+    grid-column-start:6;
+    grid-column-end: 11;
+}
+
+#dateErr {
+    color:red;
+    grid-row: 2;
+    grid-column-start:6;
+    grid-column-end: 11;
+}
+
+.no-drag {
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select:none;
+}

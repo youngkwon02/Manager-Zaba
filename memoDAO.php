@@ -41,7 +41,5 @@ class memoDAO {
         $row = mysqli_fetch_array($result);
         return $row[0];
     }
-}
-    
-    
+}   
 ?>

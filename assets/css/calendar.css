@@ -1,0 +1,228 @@
+body{
+    background: rgba(179,220,237,1);
+    background: -moz-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(179,220,237,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(188,224,238,1)));
+    background: -webkit-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: -o-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: -ms-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    background: linear-gradient(to right, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=1 );
+    
+    height: 100%;
+}
+
+html{
+    height: 100%;
+}
+
+
+.inner {
+    display: block;
+    background-color: rgba(0, 0, 0, .1);
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.MY_cover {
+    text-align: center;
+}
+
+#month {    
+    display: inline-block;
+    width: 250px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+#year {
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+#prev_M {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#next_M {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#prev_Y {
+    font-size: 10px;
+    cursor: pointer;
+}
+
+#next_Y {
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.calendarBody {
+    width: 840px;
+    height: 530px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, .45);
+    display: grid;
+    grid-template-rows: 50px repeat(6, 80px);
+    grid-template-columns: repeat(7, 120px);
+}
+
+.calendarDay {
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 14px;
+    padding-top: 14px;
+    border-bottom: black 1px solid;
+    border-left: rgba(0, 0, 0, 0.185) .5px dashed;
+    border-right: rgba(0, 0, 0, 0.185) .5px dashed;
+    font-weight: bolder;
+}
+
+.calendarDay:nth-child(1) {
+    border-left: none;
+}
+
+.calendarDay:nth-child(7) {
+    border-right: none;
+}
+
+#Saturday {
+    color: rgba(0, 0, 255, .5);
+}
+
+#Sunday {
+    color: rgba(255, 0, 0, .5);
+}
+
+/* This month element */
+.calendarThisElement {
+    text-align: right;
+    color: rgba(0, 0, 0, .8);
+    font-size: 14px;
+    border-left: 0.3px rgba(0, 0, 0, .3) solid;
+    border-right: 0.3px rgba(0, 0, 0, .3) solid;
+    border-bottom: 0.3px rgba(0, 0, 0, .3) solid;
+}
+
+/* Prev month element */
+.calendarPrevElement {
+    text-align: right;
+    color: rgba(0, 0, 0, .308);
+    font-size: 14px;
+    border-left: 0.3px rgba(0, 0, 0, .3) solid;
+    border-right: 0.3px rgba(0, 0, 0, .3) solid;
+    border-bottom: 0.3px rgba(0, 0, 0, .3) solid;
+}
+
+/* Next month element */
+.calendarNextElement {
+    text-align: right;
+    color: rgba(0, 0, 0, 0.308);
+    font-size: 14px;
+    border-left: 0.3px rgba(0, 0, 0, .3) solid;
+    border-right: 0.3px rgba(0, 0, 0, .3) solid;
+    border-bottom: 0.3px rgba(0, 0, 0, .3) solid;
+}
+
+.ele_num {
+    padding-right: 10px;
+}
+
+.ele_date {
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+.ele_date .offMouse {
+    display: inline;
+}
+
+.ele_date .onMouse {
+    display: none;
+}
+
+.ele_date:hover {
+    width: 180px;
+    height: 25px;
+    color: white;
+    font-size: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.ele_date:hover .offMouse {
+    display: none;
+}
+
+.ele_date:hover .onMouse {
+    display: inline;
+}
+
+#TODAY {
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#back {
+    position: absolute;
+    left: 200px;
+    top: 55px;
+    cursor: pointer;
+}
+
+.no-drag {
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select:none;
+}
+
+#help{
+    text-decoration: none;
+    position: absolute;
+    top: 55px;
+    left: 1100px;
+}
+
+#help #manual{
+    display: none;
+}
+
+#help:hover #manual{
+    display: inline-block;
+}
+
+#add>a {
+    text-decoration: none;
+    position: absolute;
+    top: 55px;
+    left: 900px;
+}
+
+#drop {
+    position: absolute;
+    top: 55px;
+    left: 1000px;
+}
+
+#manual {
+    background-color: rgba(255, 255, 255, .45);
+    width: 480px;
+    height: 70px;
+    position: absolute;
+    top: 70px;
+    left: -250px;
+    font-size: 15px;
+    padding-top: 20px;
+    border-radius: 15px;
+}

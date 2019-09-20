@@ -99,6 +99,10 @@ body {
     height: 100%;
 }
 
+#menuTab>ul{
+    padding-inline-start: 15px;
+}
+
 #menuTab>ul>li{
     color: rgba(0, 0, 0, 0.7);
     margin-bottom: 1em;
@@ -155,7 +159,7 @@ header>.inner>p {
 #todo {
     display: block;
     background-size: 100% 100%;
-    min-height: calc(100vh - 12em);
+    min-height: calc(65vh);
     background-color: #e475b9;
     padding-top: 12%;
     padding-bottom: 4%;
@@ -211,6 +215,8 @@ header>.inner>p {
 #todoBox>#addButton {
     grid-column-start: 2;
     grid-column-end: 11;
+    text-align:right !important;
+    margin-right:35px;
 }
 
 #todoP {
@@ -224,15 +230,10 @@ header>.inner>p {
     
 }
 
-#addButton {
-    text-align:right !important;
-    margin-right:35px;
-}
-
 #memo {
     display: block;
     background-size: 100%;
-    min-height: calc(100vh);
+    min-height: calc(90vh);
     background-color: #5ece96;
 }
 
@@ -315,7 +316,7 @@ header>.inner>p {
 #calendar {
     display: block;
     background-size: 100%;
-    min-height: calc(130vh);
+    min-height: calc(100vh);
     background-color: #4c9fee;
 }
 
@@ -407,21 +408,29 @@ header>.inner>p {
     text-align: right;
     color: rgba(0, 0, 0, .8);
     font-size: 12px;
-    margin-right: 10px;
+    border-left: 0.3px rgba(0, 0, 0, .3) solid;
+    border-right: 0.3px rgba(0, 0, 0, .3) solid;
+    border-bottom: 0.3px rgba(0, 0, 0, .3) solid;
 }
 
+/* Prev month element */
 .calendarPrevElement {
     text-align: right;
     color: rgba(0, 0, 0, .308);
     font-size: 12px;
-    margin-right: 10px;
+    border-right: 0.3px rgba(0, 0, 0, .3) solid;
+    border-right: 0.3px rgba(0, 0, 0, .3) solid;
+    border-bottom: 0.3px rgba(0, 0, 0, .3) solid;
 }
 
+/* Next month element */
 .calendarNextElement {
     text-align: right;
     color: rgba(0, 0, 0, 0.308);
     font-size: 12px;
-    margin-right: 10px;
+    border-bottom: 0.3px rgba(0, 0, 0, .3) solid;
+    border-right: 0.3px rgba(0, 0, 0, .3) solid;
+    border-bottom: 0.3px rgba(0, 0, 0, .3) solid;
 }
 
 #prev_m {
@@ -469,4 +478,29 @@ header>.inner>p {
 #today {
     color: rgba(0, 0, 0, .75);
     font-size: 10px;
+    cursor: pointer;
+}
+
+#calendarAdd {
+    text-align: right;
+    color: rgba(255, 255, 255, .85);
+    padding-right: 28px;
+    margin-top: 5px;
+}
+
+#calendarAdd>a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, .85);
+}
+
+.ele_num{
+    padding-right: 10px;
+}
+
+.ele_date {
+    height: 10px;
+}
+
+#todayBox {
+    background-color: rgba(255, 138, 138, 0.897);
 }

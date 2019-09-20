@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./assets/css/home.css">
     <title>Home</title>
 </head>
-<body>
+<body class="no-drag">
     <section id="slidebar">
         <div class="inner">
             <nav>
@@ -35,6 +35,7 @@
     </section>
     <div id="menuTab">
         <ul>
+            <li><a href="./friendManagement.php">Friend management</a></li>
             <li><a href="./modifyInfo.php">Modify Info</a></li>
             <li><a href="./signoutAction.php">Sign Out</a></li>
         </ul>
@@ -99,7 +100,7 @@
                     Just leave something you must not forget!<br><br>
                     For example, you can write some phrases<br>
                     that will make you feel better.<br>
-                    Or you can write a plan to be happy<br>just by thinking!^^
+                    Or you can write a plan to be happy<br>just by thinking!
                 </p>
             </div>
             
@@ -130,10 +131,9 @@
                 <p>
                     Make your own calendar with this widget!<br>
                     You can remind your plan by writing<br>on this calendar.<br><br>
-                    In addition, you can choose and share your calendar with your friends.
+                    In addition, you can choose and share<br>your calendar with your friends.
                 </p>
             </div>
-            
             <div id="calendarBox">
                 <!-- php code for calendar -->
                 <?php require_once './initCalendar.php'; ?>
@@ -154,32 +154,136 @@
                             }
                         }
                     ?>
-                    <!-- 일자 출력 .. 1 ~ 31 ..  -->
-                    <?php 
-                        $day = $prevNumOfDay - $startDayNum;
+
+                    <?php
+                        require './initCalendar.php';
+                        require './calendarDAO.php';
+                        $user_email = $userDAO->get_userEmail($_SESSION['user_name']);
+                        $calendarDAO = new calendarDAO();
+                        $date_arr = $calendarDAO->get_date($user_email, $now_Y, $now_M);
+                        $index = count($date_arr);
+
+                    //  일자 출력 .. 1 ~ 31 ..
+                        $day = $prevNumOfDay + 1 - $startDayNum;
+                        $year = $now_Y;
+                        $month = $now_M -1;
+
                         $element = 'prev';
-                        for($i = 0; $i < 42; $i++) {                            
+                        for($i = 0; $i < 42; $i++){
                             if($i == $startDayNum) {
                                 $day = 1;
                                 $element = 'this';
+                                $month++;
+                                if($month == 13){
+                                    $month = 1;
+                                    $year ++;
+                                }
                             }
-                            if($day == $numOfDay + 1){
+                            if($day == $numOfDay + 1 && $month == $now_M){
                                 // day가 32일과 같이 numOfDay +1의 값을 가질 때 1로 Reset
                                 $day = 1;
                                 $element = 'next';
+                                $month++;
+                                if($month == 13){
+                                    $month = 1;
+                                    $year ++;
+                                }
                             }
 
+                            $dayForArr = $day;
+                            if(strlen($dayForArr) == 1){
+                                $dayForArr = '0'.$dayForArr;
+                            }
+                            $monthForArr = $month;
+                            if($monthForArr == 0){
+                                $monthForArr = 12;
+                                $year --;
+                            }
+                            if(strlen($monthForArr) == 1){
+                                $monthForArr = '0'.$monthForArr;
+                            }
+                            $yearForArr = $now_Y;
+    
+                            $indexSet = null;
+
+                            for($k = 0; $k < $index; $k++){
+                                $cond_1 = $date_arr[$k]['start_date'] <= ($yearForArr.'-'.$monthForArr.'-'.$dayForArr);
+                                $cond_2 = ($yearForArr.'-'.$monthForArr.'-'.$dayForArr)<= $date_arr[$k]['end_date'];
+                                if($cond_1 && $cond_2){
+                                    $indexSet[] = $k;
+                                }
+                            }
+                            $indexSetLen = count($indexSet);
+
                             if($element === 'prev') {
-                                echo('<div class="calendarPrevElement">'.$day.'</div>');
-                            }else if($element === 'this') {
-                                echo('<div class="calendarThisElement">'.$day.'</div>');
-                            }else if($element === 'next') {
-                                echo('<div class="calendarNextElement">'.$day.'</div>');
+                                if($indexSet != null){
+                                    if($indexSetLen>3){
+                                        echo('<div class="calendarPrevElement"><div class="ele_num">('.$indexSetLen.')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
+                                    }else{
+                                        echo('<div class="calendarPrevElement"><div class="ele_num">'.$day.'</div>');
+                                    }
+                                    for($v=0; $v<$indexSetLen; $v++){
+                                        if($v > 2){
+                                            break;
+                                        }                     
+                                        echo('<div class="ele_date" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';">&nbsp;</div>');
+                                    }
+                                    echo('</div>');
+                                }else{
+                                    echo('<div class="calendarPrevElement"><div class="ele_num">'.$day.'</div></div>');
+                                }
+                            } else if($element === 'this') {
+                                if($indexSet != null){
+                                    if($indexSetLen>3){
+                                        if($day == $now_D){
+                                            echo('<div class="calendarThisElement" id="todayBox"><div class="ele_num">('.$indexSetLen.')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
+                                        }else{
+                                            echo('<div class="calendarThisElement"><div class="ele_num">('.$indexSetLen.')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
+                                        }
+                                    }else{
+                                        if($day == $now_D){
+                                            echo('<div class="calendarThisElement" id="todayBox"><div class="ele_num">'.$day.'</div>');
+                                        }else{
+                                            echo('<div class="calendarThisElement"><div class="ele_num">'.$day.'</div>');
+                                        }
+                                    }
+                                    for($v=0; $v<$indexSetLen; $v++){
+                                        if($v > 2){
+                                            break;
+                                        }
+                                        echo('<div class="ele_date" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';">&nbsp;</div>');
+                                    }
+                                    echo('</div>');
+                                }else{
+                                    if($day == $now_D){
+                                        echo('<div class="calendarThisElement" id="todayBox"><div class="ele_num">'.$day.'</div></div>');
+                                    }else {
+                                        echo('<div class="calendarThisElement"><div class="ele_num">'.$day.'</div></div>');
+                                    }
+                                }
+                            } else if($element === 'next') {
+                                if($indexSet != null){           
+                                    if($indexSetLen>3){
+                                        echo('<div class="calendarNextElement"><div class="ele_num">('.$indexSetLen.')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
+                                    }else{
+                                        echo('<div class="calendarNextElement"><div class="ele_num">'.$day.'</div>');
+                                    }
+                                    for($v=0; $v<$indexSetLen; $v++){
+                                        if($v > 2){
+                                            break;
+                                        }
+                                        echo('<div class="ele_date" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';">&nbsp;</div>');
+                                    }
+                                    echo('</div>');
+                                }else{
+                                    echo('<div class="calendarNextElement"><div class="ele_num">'.$day.'</div></div>');
+                                }
                             }                            
                             $day ++;
                         }
                     ?>
                 </div>
+                <h1 id="calendarAdd"><a href="./calendarAction.php?action=reset&onPage=TRUE">+</a></h1>
             </div>
         </div>
     </section>

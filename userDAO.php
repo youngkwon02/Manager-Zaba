@@ -41,7 +41,7 @@ class userDAO {
 
     function add_user($user_email, $user_passwd, $user_name, $user_birth) {
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
-        $query = "INSERT INTO user_info (user_email, user_passwd, user_name, user_birth) values ('".$user_email."', MD5('".$user_passwd."'), '".$user_name."', '".$user_birth."')";
+        $query = "INSERT INTO user_info (user_email, user_passwd, user_name, user_birth, search_YN) values ('".$user_email."', MD5('".$user_passwd."'), '".$user_name."', '".$user_birth."', 'Y')";
         mysqli_query($db_connect, $query);
     }
 
@@ -63,7 +63,7 @@ class userDAO {
         $query = "SELECT user_email, user_passwd FROM user_info WHERE user_email = '".$user_email."'";
         $result = mysqli_query($db_connect, $query);
         $row = mysqli_fetch_assoc($result);
-        $query = "SELECT MD5('".$user_passwd."') FROM user_info";
+        $query = "SELECT MD5('".$user_passwd."')";
         $result = mysqli_query($db_connect, $query);
         $inpw_md5 = mysqli_fetch_row($result);
         if($inpw_md5[0] === $row['user_passwd']) {
@@ -75,7 +75,7 @@ class userDAO {
 
     function get_userName($user_email) {
         // get_userName for Session
-        // call on SigninAction
+        // call on SigninAction     
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
         $query = "SELECT user_name FROM user_info WHERE user_email = '".$user_email."'";
         $result = mysqli_query($db_connect, $query);
@@ -106,6 +106,12 @@ class userDAO {
         // null이 가능한 user_nick col에 추가
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
         $query = "UPDATE user_info SET user_nick = '".$new_nick."' WHERE user_email = '".$user_email."'";
+        mysqli_query($db_connect, $query);
+    }
+
+    function set_searchYN($user_email, $search_YN){
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "UPDATE user_info SET search_YN = '".$search_YN."' WHERE user_email = '".$user_email."'";
         mysqli_query($db_connect, $query);
     }
 

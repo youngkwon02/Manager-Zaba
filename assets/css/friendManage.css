@@ -1,0 +1,198 @@
+html{
+    margin: 0;
+}
+
+body{
+    background: url('../../images/net.png');
+    background-repeat: none;
+    background-size: cover;
+    margin: 0;
+}
+
+#inner{
+    width: 100%;
+    height: 750px;
+    display: grid;
+    grid-template-rows: repeat(10, 75px);
+    grid-template-columns: repeat(20, 65px);
+}
+
+#searchBar {
+    grid-column-start: 6;
+    grid-column-end: 16;
+    grid-row: 3;
+    height: 70px;
+    border: none;
+    border-radius: 15px;
+    text-align: center;
+    color: rgba(0, 0, 0, .65);
+    background-color: rgba(255, 255, 255, .75);
+    font-size: 40px;
+}
+
+#result {
+    display: none;
+    /* display: grid; */
+    grid-template-rows: repaet(10, 36px);
+    grid-template-columns: (10, 50px);
+    
+    grid-row-start: 5;
+    grid-row-end: 10;
+    border: none;
+    border-radius: 15px;
+    grid-column-start: 7;
+    grid-column-end: 15;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255, 255, 255, .85);
+    padding-top: 15px;
+    padding-left: 20px;
+}
+
+#result_num {
+    font-size: 20px;
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 10;
+}
+
+#result_name {
+    font-size: 20px;
+    grid-row: 2;
+    grid-column-start: 5;
+    grid-column-end: 10;
+}
+
+#result_email {
+    font-size: 20px;
+    grid-row: 3;
+    grid-column-start: 5;
+    grid-column-end: 10;
+}
+
+#result_birth {
+    font-size: 20px;
+    grid-row: 4;
+    grid-column-start: 5;
+    grid-column-end: 10;
+}
+
+#result_nick {
+    font-size: 20px;
+    grid-row: 5;
+    grid-column-start: 5;
+    grid-column-end: 10;
+}
+
+#sendRequest {
+    grid-row: 6;
+    grid-column: 9;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+#waitingReceiveRequest {
+    grid-row: 2;
+    grid-column-start: 17;
+    grid-column-end: 19;
+    background-color: rgba(0, 0, 0, .75);
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 22px;
+    color: rgba(255, 255, 255, .5);
+    margin-right: 10px;
+}
+
+#waitingSendRequest {
+    grid-row: 2;
+    grid-column-start: 19;
+    grid-column-end: 21;
+    background-color: rgba(0, 0, 0, .75);
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 22px;
+    color: rgba(255, 255, 255, .5);
+}
+
+#waitingReceiveRequest>a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, .5);    
+}
+
+#waitingSendRequest>a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, .5);    
+}
+
+#listBoard {
+    width: 100%;
+    height: 770px;
+    background-color: rgba(0, 0, 0, .65);
+    display: grid;
+    grid-template-rows: repeat(10, 77px);
+    grid-template-columns: repeat(10, 10%);
+}
+
+#receiveTitle {
+    text-align: center;
+    color: rgba(255, 255, 255, .6);
+    margin: 0;
+    padding-top: 15px;
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 6;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+
+}
+
+#sendTitle {
+    text-align: center;
+    color: rgba(255, 255, 255, .6);
+    margin: 0;
+    padding-top: 15px;
+    grid-row: 2;
+    grid-column-start: 6;
+    grid-column-end: 10;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+#receiveList {
+    grid-row-start: 3;
+    grid-row-end: 10;
+    grid-column-start: 2;
+    grid-column-end: 6;
+    border: 1px solid white;
+    color: rgba(255, 255, 255, .85);
+}
+
+#sendList {
+    grid-row-start: 3;
+    grid-row-end: 10;
+    grid-column-start: 6;
+    grid-column-end: 10;
+    border: 1px solid white;
+    color: rgba(255, 255, 255, .85);
+}
+
+ol {
+    padding-left: 50px;
+    line-height: 28px;
+}
+
+#back {
+    grid-row: 2;
+    grid-column: 3;
+    background-color: rgba(255, 255, 255, 0.13);
+}
+
+#back>a>img {
+    width: 65px;
+    height: 75px;
+}

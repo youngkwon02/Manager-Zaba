@@ -2,7 +2,6 @@
 <?php session_start(); ?>
 <?php require 'userDAO.php'; ?>
 <?php require 'todoDAO.php'; ?>
-<!-- @TODO:이후에 이 부분에 session이 없으면 접근 차단하는 코드 작성 필요 -->
 <?php
     if($_SESSION['user_name'] == null){
         header('location: sign.php');

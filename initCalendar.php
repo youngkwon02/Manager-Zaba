@@ -9,40 +9,32 @@
     }
 
     if($_SESSION['isFirstLoad'] == null){
-        $now_M = date('m', time());
         $now_Y = date('Y', time());
-        $numOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //이번달의 일 수
-        $flag = 'none';
-        $now_M --;
-        if($now_M == 0){
-            $now_M = 12;
-            $now_Y --;
-            $flag = 'prev';
-        }
-        $prevNumOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //지난달의 일 수
-        if($flag == 'prev'){
-            $now_M = 1;
-            $now_Y++;
-        }else {
-            $now_M++;
+        $now_M = date('m', time());
+        $now_D = date('d', time());
+
+        $prev_Y = $now_Y;
+        $next_Y = $now_Y;
+
+        $prev_M = $now_M - 1;
+        if($prev_M == 0){
+            $prev_M = 12;
+            $prev_Y--;
         }
 
-        $now_M ++;
-        if($now_M == 13){
-            $now_M = 1;
-            $now_Y ++;
-            $flag = 'next';
+        $next_M = $now_M + 1;
+        if($next_M == 13){
+            $next_M = 1;
+            $next_Y++;
         }
-        $prevNumOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //다음달의 일 수
-        if($flag == 'next'){
-            $now_M = 12;
-            $now_Y--;
-        }else {
-            $now_M--;
-        }
+
+        $numOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //이번달의 일 수
+        $prevNumOfDay = cal_days_in_month(CAL_GREGORIAN, $prev_M, $prev_Y); //지난달의 일 수
+        $nextNumOfDay = cal_days_in_month(CAL_GREGORIAN, $next_M, $next_Y); //다음달의 일 수
+        
     
         // $startDayNum = 6; //이번달의 시작 요일 0 to 6
-        $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y)) - 1;
+        $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y))-1;
         if($startDayNum == -1) {
             $startDayNum = 6;
         }
@@ -60,34 +52,25 @@
         if($_SESSION['year'] > ($present_Y + 9 - 1960)){ $_SESSION['year'] = $present_Y + 9 - 1960; }
         $numOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //이번달의 일 수
         
-        $flag = 'none';
-        $now_M --;
-        if($now_M == 0){
-            $now_M = 12;
-            $now_Y --;
-            $flag = 'prev';
-        }
-        $prevNumOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //지난달의 일 수
-        if($flag == 'prev'){
-            $now_M = 1;
-            $now_Y++;
-        }else {
-            $now_M++;
+        $prev_Y = $now_Y;
+        $next_Y = $now_Y;
+
+        $prev_M = $now_M - 1;
+        if($prev_M == 0){
+            $prev_M = 12;
+            $prev_Y--;
         }
 
-        $now_M ++;
-        if($now_M == 13){
-            $now_M = 1;
-            $now_Y ++;
-            $flag = 'next';
+        $next_M = $now_M + 1;
+        if($next_M == 13){
+            $next_M = 1;
+            $next_Y++;
         }
-        $prevNumOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //다음달의 일 수
-        if($flag == 'next'){
-            $now_M = 12;
-            $now_Y--;
-        }else {
-            $now_M--;
-        }
+
+        $numOfDay = cal_days_in_month(CAL_GREGORIAN, $now_M, $now_Y); //이번달의 일 수
+        $prevNumOfDay = cal_days_in_month(CAL_GREGORIAN, $prev_M, $prev_Y); //지난달의 일 수
+        $nextNumOfDay = cal_days_in_month(CAL_GREGORIAN, $next_M, $next_Y); //다음달의 일 수
+        
 
          // $startDayNum = 6; //이번달의 시작 요일 0 to 6
          $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y)) - 1;

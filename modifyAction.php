@@ -10,6 +10,7 @@
 
 <?php
     $nick = $_POST['nick'];
+    $search = $_POST['search_YN'];
     $pass = $_POST['pass'];
     $passck = $_POST['passck'];
 
@@ -24,6 +25,7 @@
         $userDAO = new userDAO();
         $email = $userDAO->get_userEmail($_SESSION['user_name']);
         $userDAO->set_userNick($email, $nick);
+        $userDAO->set_searchYN($email, $search);
         if($pass !== ''){
             $userDAO->reset_passwd($email, $_SESSION['user_name'], $pass);
         }

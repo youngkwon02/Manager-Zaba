@@ -1,18 +1,33 @@
+/*****************************************************************************************/
+Project_Unknown.
+
 index.php에서 sign-in이나 main등의 page로 redirection
 Member info에 대한 class : userDAO
+TODO info에 대한 class: todoDAO
+Memo info에 대한 class: memoDAO
+Calendar info에 대한 class: calendarDAO
+Relation Manage에 대한 class: relationDAO
+
 Sign in과 Sign up에 대한 Action은 각각 SigninAction.php와 SignupAction.php
 
-DB
+DATABASE
     username : PUadmin
     dbname : Project_Unknown
     tablename : user_info( user_seq, user_email, user_passwd, user_name, user_birth )
                 TODO( TODO_seq, user_email, user_name, TODO_content, date )
+                MEMO( MEMO_seq, user_email, user_name, title, text, Last_Modified )
+                CALENDAR( CAL_seq, title, owner, start_date, end_date, record_date, share_YN, color )
+                relation( relation_seq, first_user_email, second_user_email, since )
 
 Calendar
     $numOfDay, $prevNumOfDay, $nextNumOfDay, $startDayNum 등으로 달력 구성.
     추가적으로 PHP 기본 제공 함수를 통해 $now_M과 $now_Y를 구해서 달력 생성.
 
     이제 home에서 Calendar widget을 볼 때, 연도와 월에따른 달력의 변화가 필요.
-    두달 혹은 그 이상의 차이가 나는 시점을 보기 원할 때를 생각하면
-    한번 이상의 reload가 필요하므로, 이는 Ajax을 사용.
+    home.js의 JS function과 calendarAction.php, initCalendar.php에서 날짜 이동 처리 완료.
+    
+Relation
+    친구 관계는 Friend Management에서 관리.
+    기능은 Search bar에서 user_name(NOT NULL) search, using Ajax, express that user.
+    차선책으로 Form으로 처리하는 방법이 있지만, 원하는 바는 Ajax이 맞는거같다.
     
