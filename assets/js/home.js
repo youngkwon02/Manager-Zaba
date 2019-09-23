@@ -16,7 +16,7 @@ $(document).ready(function(){
         window.location.href = './calendarAction.php?action=nextY';
     });
 
-    $('#today').click(function(){
+    $('#todayInner').click(function(){
         window.location.href = './calendarAction.php?action=reset'
     });
 // ----------------------------------------------------------------------
@@ -37,7 +37,7 @@ $(document).ready(function(){
         window.location.href = './calendarAction.php?action=nextY&onPage=TRUE';
     });
 
-    $('#TODAY').click(function(){
+    $('#todayInner').click(function(){
         window.location.href = './calendarAction.php?action=reset&onPage=TRUE'
     });
 
@@ -200,6 +200,23 @@ $(document).ready(function(){
                 }
             }
         }
+    })
+
+    $('#calFilter1').on('change', function(){
+        window.location.href="./calendarFilterAction.php?filter=my";
+    })
+    $('#calFilter2').on('change', function(){
+        window.location.href="./calendarFilterAction.php?filter=all";
+    })
+
+    $('#help').on('mouseenter', function(){
+        var filter = document.getElementById('calendarFilter');
+        filter.style.display = 'none';
+    })
+
+    $('#help').on('mouseout', function(){
+        var filter = document.getElementById('calendarFilter');
+        filter.style.display = 'block';
     })
 });
 

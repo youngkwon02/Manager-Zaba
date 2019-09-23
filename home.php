@@ -163,7 +163,7 @@
                         $calendarDAO = new calendarDAO();
                         $relationDAO = new relationDAO();
                         $allFriendsList = $relationDAO->getAllFriendsList($user_email);
-                        $date_arr = $calendarDAO->get_date($user_email, $allFriendsList, $now_Y, $now_M);
+                        $date_arr = $calendarDAO->get_allDate($user_email, $allFriendsList, $now_Y, $now_M);
                         $index = count($date_arr);
 
                     //  일자 출력 .. 1 ~ 31 ..

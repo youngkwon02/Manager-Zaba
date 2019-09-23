@@ -113,7 +113,7 @@
 
         function getAllFriendsList($owner_email){
             $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
-            $query = "SELECT IF((first_user_email = '".$owner_email."'), second_user_email, first_user_email) FROM relation WHERE (first_user_email = '".$owner_email."' OR second_user_email = '".$owner_email."')";
+            $query = "SELECT IF((first_user_email = '".$owner_email."'), second_user_email, first_user_email) FROM relation WHERE ((first_user_email = '".$owner_email."' AND (calendar_filter='N' OR calendar_filter='S')) OR (second_user_email = '".$owner_email."' AND (calendar_filter='N' OR calendar_filter='F')))";
             $result = mysqli_query($db_connect, $query);
 
             $row = mysqli_fetch_array($result);
@@ -155,6 +155,29 @@
                 }
             }
             return $returnArr;
+        }
+
+        function getCalendarFilter($user_email, $target_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "SELECT relation_seq FROM relation WHERE (first_user_email = '".$user_email."' AND second_user_email = '".$target_email."' AND (calendar_filter='Y' OR calendar_filter='F')) OR (second_user_email='".$user_email."' AND first_user_email='".$target_email."' AND (calendar_filter='Y' OR calendar_filter='S'))";
+            $result = mysqli_query($db_connect, $query);
+            if($row = mysqli_fetch_array($result)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function setCalendarFilter($user_email, $target_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "UPDATE relation SET calendar_filter = if((calendar_filter != 'N' ), 'Y', if((first_user_email = '".$user_email."'), 'F', 'S')) WHERE (first_user_email='".$user_email."' AND second_user_email='".$target_email."') OR (first_user_email='".$target_email."' AND second_user_email='".$user_email."')";
+            mysqli_query($db_connect, $query);
+        }
+
+        function removeCalendarFilter($user_email, $target_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "UPDATE relation SET calendar_filter = if((calendar_filter != 'Y' ), 'N', if((first_user_email = '".$user_email."'), 'S', 'F')) WHERE (first_user_email='".$user_email."' AND second_user_email='".$target_email."') OR (first_user_email='".$target_email."' AND second_user_email='".$user_email."')";
+            mysqli_query($db_connect, $query);
         }
     }
 ?>

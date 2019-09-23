@@ -19,7 +19,7 @@
 </head>
 <body>
     <h1>
-    <a id="back" href="./home.php" style="text-decoration:none; color: rgba(255, 255, 255, .9);"><
+    <a id="back" href="./home.php#todo" style="text-decoration:none; color: rgba(255, 255, 255, .9);"><
     </a>        
     <a href="./manageTODO.php" style="text-decoration:none; color: yellow;">
         <?php

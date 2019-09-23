@@ -186,7 +186,6 @@ html{
 #TODAY {
     text-align: center;
     font-size: 12px;
-    cursor: pointer;
     display: grid;
     grid-template-rows: 1;
     grid-template-columns: repeat(25, 50px);
@@ -195,6 +194,7 @@ html{
 #todayInner {
     grid-column: 13;
     margin-top: 7px;
+    cursor: pointer;
 }
 
 #back {
@@ -245,4 +245,10 @@ html{
     font-size: 15px;
     padding-top: 20px;
     border-radius: 15px;
+}
+
+#calendarFilter{
+    grid-column-start: 15;
+    grid-column-end: 20;
+    font-size: 14px;
 }

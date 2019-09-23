@@ -113,11 +113,33 @@ function sendMessage(eleIndex){
 
 }
 
-function noExpress(eleIndex){
-    
+function setCalendarFilter(eleIndex){
+    var targetName = document.getElementsByClassName('eleName')[eleIndex].innerText;
+
+    var target = confirm("'"+targetName+"' 님의 일정을 표시하지 않겠습니까?");    
+    if(target === true){
+        var targetEmail = document.getElementsByClassName('eleMail')[eleIndex].innerText;
+        window.location.href = "./setCalendarFilterAction.php?targetEmail="+targetEmail+"&targetName="+targetName;
+    }
+}
+
+function removeCalendarFilter(eleIndex){
+    var targetName = document.getElementsByClassName('eleName')[eleIndex].innerText;
+
+    var target = confirm("'"+targetName+"' 님의 일정을 표시하시겠습니까?");    
+    if(target === true){
+        var targetEmail = document.getElementsByClassName('eleMail')[eleIndex].innerText;
+        window.location.href = "./removeCalendarFilterAction.php?targetEmail="+targetEmail+"&targetName="+targetName;        
+    }
 }
 
 function deleteFriend(eleIndex){
-    var deleteEmail = document.getElementsByClassName('eleMail')[eleIndex].innerText;
-    window.location.href = "./deleteFriendAction.php?deleteEmail="+deleteEmail+"&direction=friendList.php";    
+    var deleteName = document.getElementsByClassName('eleName')[eleIndex].innerText;
+    var del = confirm("'"+deleteName+"' 님과 친구를 끊으시겠습니까?");
+    
+    if(del === true){
+        var deleteEmail = document.getElementsByClassName('eleMail')[eleIndex].innerText;
+        window.location.href = "./deleteFriendAction.php?deleteEmail="+deleteEmail+"&direction=friendList.php";    
+    }
+
 }

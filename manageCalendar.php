@@ -20,7 +20,7 @@
     <div class="inner">
         <div class="MY_cover"><span id="back"><a href="./calendarAction.php?action=reset"><img src="./images/back.png" style="width: 60px; height: 60px;"></a></span><span id="prev_M">◀</span><h1 id="month"><?= $monthArr[$_SESSION['month']] ?></h1><span id="next_M">▶</span><span id="add"><a href="./saveCalendar.php"><img src="./images/add.png" style="width: 60px; height: 60px;"></a></span><span id="drop" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="./images/drop.png" style="width: 60px; height: 60px;"></span><span id="help"><img src="./images/help.png" style="width: 60px; height: 60px;"><span id="manual">Add : Click '+' button on the left<br>Drop : Drag the event you want to delete to the 'x' button on the left</span></span></div>
         <div class="MY_cover"><span id="prev_Y">◁</span><h5 id="year"><?= $yearArr[$_SESSION['year']] ?></h5><span id="next_Y">▷</span></div>
-        <div class="no-drag" id="TODAY"><span id="todayInner">Today</span></div><br>
+        <div class="no-drag" id="TODAY"><span id="todayInner">Today</span><div id="calendarFilter">내 일정 보기 : <input type="radio" name="calendarFilters" value="my" id="calFilter1" <?php if($_SESSION['filter'] === 'my'){ echo('checked="checked"'); } ?> > &nbsp;&nbsp;모든 일정 보기: <input type="radio" name="calendarFilters" value="all" id="calFilter2" <?php if($_SESSION['filter'] != 'my'){ echo('checked="checked"'); } ?>></div></div><br>
         <div class="calendarBody">            
             <?php
                 for($i=0; $i<7; $i++) {
@@ -47,8 +47,13 @@
                 $allFriendsList = $relationDAO->getAllFriendsList($user_email);
                 // date_arr is 2 dimensional array
                 // arr[rowNum][colName] format
+                if($_SESSION['filter'] === 'my'){
+                    $date_arr = $calendarDAO->get_myDate($user_email, $now_Y, $now_M);
+                }else{
+                    // filter = all or null
+                    $date_arr = $calendarDAO->get_allDate($user_email, $allFriendsList, $now_Y, $now_M);
+                }
                 
-                $date_arr = $calendarDAO->get_date($user_email, $allFriendsList, $now_Y, $now_M);
             ?>
 
             <?php 
@@ -181,7 +186,7 @@
                                     }
                                 }
                                 if($owner != $_SESSION['user_name']){
-                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$owner.' : '.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$owner.' : '.$date_arr[$indexSet[$v]]['title'].'</span></div>');
                                 }else{
                                     echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
                                 }
@@ -219,7 +224,7 @@
                                     }
                                 }
                                 if($owner != $_SESSION['user_name']){
-                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$owner.' : '.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$owner.' : '.$date_arr[$indexSet[$v]]['title'].'</span></div>');
                                 }else{
                                     echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
                                 }

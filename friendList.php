@@ -34,6 +34,28 @@
             }</script>');
             $_SESSION['deleteFriend'] = null;
         }
+        
+        if($_SESSION['calendarFilter'] === 'REMOVE'){
+            $message = $_SESSION['filterTarget']."님의 일정을 표시합니다.";
+
+            echo('<script>window.onload = function(){
+                setTimeout(function(){
+                    alert("'.$message.'");
+                }, 200);
+            }</script>');
+            $_SESSION['calendarFilter'] = null;
+            $_SESSION['filterTarget'] = null;
+        }else if($_SESSION['calendarFilter'] === 'SET'){
+            $message = $_SESSION['filterTarget']."님의 일정을 표시하지 않습니다.";
+
+            echo('<script>window.onload = function(){
+                setTimeout(function(){
+                    alert("'.$message.'");
+                }, 200);
+            }</script>');
+            $_SESSION['calendarFilter'] = null;
+            $_SESSION['filterTarget'] = null;
+        }
     ?> 
 
     <div id="searchDiv">
@@ -50,7 +72,7 @@
             $userDAO = new userDAO();
             $owner_email = $userDAO->get_userEmail($_SESSION['user_name']);
             $relationDAO = new relationDAO();
-
+            
             $filter = $_SESSION['listFilter'];
             echo("<script>filterColor('".$filter."')</script>");
             $friendArr = array(array());
@@ -72,7 +94,11 @@
                     echo('<div class="eleImg">'.$firstName.'</div>');
                     echo('<div class="eleName">'.$friendArr[$i]['name'].'</div>');
                     echo('<div class="eleMail">'.$friendArr[$i]['email'].'</div>');
-                    echo('<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('.$i.')">쪽지 보내기</div><div class="noExpress" onclick="noExpress('.$i.')">일정 표시 안함</div><div class="deleteFriend" onclick="deleteFriend('.$i.')">친구 삭제</div></div>');
+                    if($relationDAO->getCalendarFilter($owner_email, $friendArr[$i]['email'])){
+                        echo('<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('.$i.')">쪽지 보내기</div><div class="noExpress" onclick="removeCalendarFilter('.$i.')">일정 표시하기</div><div class="deleteFriend" onclick="deleteFriend('.$i.')">친구 삭제</div></div>');
+                    }else{
+                        echo('<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('.$i.')">쪽지 보내기</div><div class="noExpress" onclick="setCalendarFilter('.$i.')">일정 표시 안함</div><div class="deleteFriend" onclick="deleteFriend('.$i.')">친구 삭제</div></div>');
+                    }
                     echo('<div class="eleEtc" onclick="etcFunc('.$i.')">'.'···'.'</div>');
                     echo('</div>');
                 }
@@ -94,11 +120,15 @@
 
                 for($i=0; $i<$friendNum; $i++){
                     $firstName = substr($friendArr[$i]['name'], 0, 3);
-                    echo('<div class="listEle">');
+                    echo('<div class="no-drag listEle">');
                     echo('<div class="eleImg">'.$firstName.'</div>');
                     echo('<div class="eleName">'.$friendArr[$i]['name'].'</div>');
                     echo('<div class="eleMail">'.$friendArr[$i]['email'].'</div>');
-                    echo('<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('.$i.')">쪽지 보내기</div><div class="noExpress" onclick="noExpress('.$i.')">일정 표시 안함</div><div class="deleteFriend" onclick="deleteFriend('.$i.')">친구 삭제</div></div>');
+                    if($relationDAO->getCalendarFilter($owner_email, $friendArr[$i]['email'])){
+                        echo('<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('.$i.')">쪽지 보내기</div><div class="noExpress" onclick="removeCalendarFilter('.$i.')">일정 표시하기</div><div class="deleteFriend" onclick="deleteFriend('.$i.')">친구 삭제</div></div>');
+                    }else{
+                        echo('<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('.$i.')">쪽지 보내기</div><div class="noExpress" onclick="setCalendarFilter('.$i.')">일정 표시 안함</div><div class="deleteFriend" onclick="deleteFriend('.$i.')">친구 삭제</div></div>');
+                    }
                     echo('<div class="eleEtc" onclick="etcFunc('.$i.')">'.'···'.'</div>');
                     echo('</div>');
                 }

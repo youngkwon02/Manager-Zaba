@@ -6,7 +6,7 @@ html {
 body{
     margin: auto;
     display: grid;
-    grid-template-rows: repeat(19, 40px);
+    grid-template-rows: repeat(20, 40px);
     grid-template-columns: repeat(18, 80px);
 }
 
@@ -94,7 +94,7 @@ h2>a{
 
 #list {
     grid-row-start: 5;
-    grid-row-end: 20;
+    grid-row-end: 21;
     grid-column-start: 1;
     grid-column-end: 19;
     background-color: rgb(128, 173, 199);
@@ -131,8 +131,10 @@ h2>a{
     grid-row-start: 1;
     grid-row-end: 6;
     grid-column: 1;
-    font-size: 45px;
-    margin: auto;
+    font-size: 160%;
+    margin-top: 32.73px;
+    margin-bottom: 32.73px;
+    text-align: center;
 }
 
 .eleName {
