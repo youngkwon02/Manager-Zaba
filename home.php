@@ -3,6 +3,7 @@
 <?php require 'userDAO.php'; ?>
 <?php require 'todoDAO.php'; ?>
 <?php require 'memoDAO.php'; ?>
+<?php require 'relationDAO.php'; ?>
 <?php
     if($_SESSION['user_name'] == null){
         header('location: sign.php');
@@ -33,16 +34,23 @@
         </div>
     </section>
     <div id="menuTab">
+        <?php
+            $userDAO = new userDAO();
+            $relationDAO = new relationDAO();
+
+            $user_email = $userDAO->get_userEmail($_SESSION['user_name']);
+            $receiveNum = $relationDAO->getNumOfReceiveRequest($user_email);
+        ?>
         <ul>
             <li><a href="./friendList.php">Friend List</a></li>
-            <li><a href="./friendManagement.php">Friend Search</a></li>
+            <li><a href="./friendManagement.php">Friend Search</a><?php if($receiveNum != 0){echo('<span style="font-weight: bold; color: red; font-size: 20px;">!</span>');} ?></li>
             <li><a href="./modifyInfo.php">Modify Info</a></li>
             <li><a href="./signoutAction.php">Sign Out</a></li>
         </ul>
     </div>
     <header id = "header">
         <div class="inner">
-            <h1>Welcome, <?php $userDAO = new userDAO(); echo($userDAO->get_userNick($userDAO->get_userEmail($_SESSION['user_name']))); ?></h1>
+            <h1>Welcome, <?php echo($userDAO->get_userNick($user_email)); ?></h1>
             <p>
                 Are you having a good day today?<br>
                 Or do you have plan that makes you feel better just by imagining?<br>
@@ -74,12 +82,10 @@
                 </h1>
                 <p id="todoP">
                     <?php
-                        $userDAO = new userDAO();
-                        $email = $userDAO->get_userEmail($_SESSION['user_name']);
                         $name = $_SESSION['user_name'];
                         $date = date("Y-m-d", time());
                         $todoDAO = new todoDAO();
-                        $line = $todoDAO->get_TODO($email, $name, $date);
+                        $line = $todoDAO->get_TODO($user_email, $name, $date);
                         echo('<h1 id="addButton"><a href="./manageTODO.php" style="text-decoration: none; color: rgba(255, 255, 255, .85);">+</a></h1>');
                         echo('<script>resize_todoP('.$line.');</script>');
                         if($line>4) {
@@ -110,14 +116,18 @@
                     echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Title is too long (UP TO 27 characters)</h4>');
                 }else if($_GET['memo_Ex'] == 2) {
                     echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Text is too long (UP TO 300 characters)</h4>');
+                }else if($_GET['memo_Ex'] == 3) {
+                    echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Title contains semi-colon!</h4>');
+                }else if($_GET['memo_Ex'] == 4) {
+                    echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Text contains Semi-colon!</h4>');
                 }
             ?>
 
             <div id="memoBox">
                 <?php $memoDAO = new memoDAO(); ?>
                 <form id="memoForm" method="POST" action="./saveMemoAction.php"><br><br>
-                    <input id="memoTitle" type="text" name="title" value="<?php echo($memoDAO->get_memoTitle($email, $name));?>"><br><br>
-                    <textarea id="memoText" name="text"><?= $memoDAO->get_memo($email, $name) ?></textarea><br>
+                    <input id="memoTitle" type="text" name="title" value="<?php echo($memoDAO->get_memoTitle($user_email, $name));?>"><br><br>
+                    <textarea id="memoText" name="text"><?= $memoDAO->get_memo($user_email, $name) ?></textarea><br>
                     <button id="memoSubmit" onclick="save_memo()">Save</button>
                 </form>
             </div>
@@ -158,10 +168,7 @@
                     <?php
                         require './initCalendar.php';
                         require './calendarDAO.php';
-                        require './relationDAO.php';
-                        $user_email = $userDAO->get_userEmail($_SESSION['user_name']);
                         $calendarDAO = new calendarDAO();
-                        $relationDAO = new relationDAO();
                         $allFriendsList = $relationDAO->getAllFriendsList($user_email);
                         $date_arr = $calendarDAO->get_allDate($user_email, $allFriendsList, $now_Y, $now_M);
                         $index = count($date_arr);

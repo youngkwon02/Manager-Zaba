@@ -24,15 +24,12 @@
         <?php
         if($_GET['FAIL'] === 'title'){
             echo('<h3 id="titleErr">일정은 공란일 수 없습니다.</h3>');
+        }else if($_GET['FAIL'] === 'titleException'){
+            echo('<h3 id="dateErr">일정에 들어갈 수 없는<br>문자가 포함되어 있습니다.</h3>');
         }else if($_GET['FAIL'] === 'date'){
             echo('<h3 id="dateErr">종료날짜가 시작날짜보다<br>과거일 수 없습니다.</h3>');
         }
-        // 이하 조건문 Can't catch the condition
-            if($_SERVER['REQUEST METHOD'] === 'GET'){
-                if($_GET['FAIL'] === 'title') {
-                    echo('<h3 style="color:red; grid-column-start:6; grid-column-end: 10;">일정은 공란일 수 없습니다.</h3>');
-                }
-            }
+
         ?>
         <div id="title"><span class="text">일정 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" name="title"></div>
         <div id="start">

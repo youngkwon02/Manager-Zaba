@@ -70,7 +70,7 @@
             mysqli_query($db_connect, $query1);
 
             $now = date('Y-m-d', time());
-            $query2 = "INSERT INTO relation(first_user_email, second_user_email, since) VALUES('".$requester."', '".$responser."', '".$now."')";
+            $query2 = "INSERT INTO relation(first_user_email, second_user_email, since, calendar_filter) VALUES('".$requester."', '".$responser."', '".$now."', 'N')";
             mysqli_query($db_connect, $query2);
         }
 

@@ -14,15 +14,23 @@
     $text = $_POST['text'];
     $text = str_replace("\r\n", '//', $text);
 
-    if(strlen($title)>27) {
-        header('location: home.php?memo_Ex=1#memo');    
-    }else {
-        if(strlen($text)>300) {
-            header('location: home.php?memo_Ex=2#memo');
+    if(strpos($title, "'") !== false){
+        header('location: home.php?memo_Ex=3#memo');
+    }else if(strpos($text, "'") !== false){
+        header('location: home.php?memo_Ex=4#memo');
+    }
+    else{
+        if(strlen($title)>27) {
+            header('location: home.php?memo_Ex=1#memo');    
         }else {
-            $memoDAO->set_memo($email, $name, $title, $text);
-            header('location: home.php#memo');
+            if(strlen($text)>300) {
+                header('location: home.php?memo_Ex=2#memo');
+            }else {
+                $memoDAO->set_memo($email, $name, $title, $text);
+                header('location: home.php#memo');
+            }
         }
     }
+    
 
 ?>

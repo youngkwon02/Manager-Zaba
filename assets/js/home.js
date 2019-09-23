@@ -16,7 +16,7 @@ $(document).ready(function(){
         window.location.href = './calendarAction.php?action=nextY';
     });
 
-    $('#todayInner').click(function(){
+    $('#today').click(function(){
         window.location.href = './calendarAction.php?action=reset'
     });
 // ----------------------------------------------------------------------

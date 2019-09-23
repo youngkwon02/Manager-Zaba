@@ -16,6 +16,11 @@
         header('location: ./saveCalendar.php?FAIL=title');
     }
 
+    if(strpos($title, "'") !== false){
+        $success = false;
+        header('location: ./saveCalendar.php?FAIL=titleException');
+    }
+
     $user_email = $userDAO->get_userEmail($_SESSION['user_name']);
 
     $start_year = str_replace('년', '', $_POST['startY']);
