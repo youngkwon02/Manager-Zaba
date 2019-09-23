@@ -23,6 +23,34 @@
             </form>
         </div>
     </div>
+    <?php
+        session_start();
+        if($_SESSION['loginERR'] === 'ID'){
+            $message = "존재하지 않는 계정입니다.";
+            echo('<script>window.onload = function(){
+                setTimeout(function(){
+                    alert("'.$message.'");
+                }, 200);
+            }</script>');
+            $_SESSION['loginERR'] = null;
+        }else if($_SESSION['loginERR'] === 'emptyID'){
+            $message = "E-mail을 입력하세요.";
+            echo('<script>window.onload = function(){
+                setTimeout(function(){
+                    alert("'.$message.'");
+                }, 200);
+            }</script>');
+            $_SESSION['loginERR'] = null;
+        }else if($_SESSION['loginERR'] === 'PW'){
+            $message = "비밀번호가 올바르지 않습니다.";
+            echo('<script>window.onload = function(){
+                setTimeout(function(){
+                    alert("'.$message.'");
+                }, 200);
+            }</script>');
+            $_SESSION['loginERR'] = null;
+        }
+    ?>
     <div id = "div_signup_form">
         <h2>Sign up</h2><br>  
             <div id = "signup_form">

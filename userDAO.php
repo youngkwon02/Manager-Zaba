@@ -59,17 +59,23 @@ class userDAO {
     }
 
     function login_action($user_email, $user_passwd) {
+        if($user_email === '' || $user_email ==='E-mail'){
+            return 'EMPTY';
+        }
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
         $query = "SELECT user_email, user_passwd FROM user_info WHERE user_email = '".$user_email."'";
         $result = mysqli_query($db_connect, $query);
         $row = mysqli_fetch_assoc($result);
+        if($row == false){
+            return 'NOID';
+        }
         $query = "SELECT MD5('".$user_passwd."')";
         $result = mysqli_query($db_connect, $query);
         $inpw_md5 = mysqli_fetch_row($result);
-        if($inpw_md5[0] === $row['user_passwd']) {
-            return TRUE;
+        if($inpw_md5[0] === $row['user_passwd']){
+            return 'SUCCESS';
         } else {
-            return FALSE;
+            return 'INCORRECTPW';
         }
     }
 
