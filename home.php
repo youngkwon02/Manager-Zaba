@@ -3,7 +3,6 @@
 <?php require 'userDAO.php'; ?>
 <?php require 'todoDAO.php'; ?>
 <?php require 'memoDAO.php'; ?>
-<!-- @TODO:이후에 이 부분에 session이 없으면 접근 차단하는 코드 작성 필요 -->
 <?php
     if($_SESSION['user_name'] == null){
         header('location: sign.php');
@@ -35,6 +34,7 @@
     </section>
     <div id="menuTab">
         <ul>
+            <li><a href="./friendList.php">Friend List</a></li>
             <li><a href="./friendManagement.php">Friend management</a></li>
             <li><a href="./modifyInfo.php">Modify Info</a></li>
             <li><a href="./signoutAction.php">Sign Out</a></li>

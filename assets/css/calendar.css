@@ -27,41 +27,58 @@ html{
 
 .MY_cover {
     text-align: center;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: repeat(25, 50px);
 }
 
-#month {    
+#month {
+    grid-column-start: 11;
+    grid-column-end: 14;
     display: inline-block;
     width: 250px;
     text-align: center;
+    margin-top: 12px;
     margin-bottom: 12px;
 }
 
 #year {
     display: inline-block;
-    width: 70px;
     text-align: center;
     margin-top: 0;
     margin-bottom: 8px;
+    grid-row: 1;
+    grid-column-start: 13;
 }
 
 #prev_M {
     font-size: 20px;
     cursor: pointer;
+    grid-row: 1;
+    grid-column: 10;
+    margin-top: 22px;
 }
 
 #next_M {
     font-size: 20px;
     cursor: pointer;
+    grid-row: 1;
+    grid-column: 16;
+    margin-top: 22px;
 }
 
 #prev_Y {
     font-size: 10px;
     cursor: pointer;
+    grid-row: 1;
+    grid-column: 12;
 }
 
 #next_Y {
     font-size: 10px;
     cursor: pointer;
+    grid-row: 1;
+    grid-column: 14;
 }
 
 .calendarBody {
@@ -170,13 +187,21 @@ html{
     text-align: center;
     font-size: 12px;
     cursor: pointer;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: repeat(25, 50px);
+}
+
+#todayInner {
+    grid-column: 13;
+    margin-top: 7px;
 }
 
 #back {
-    position: absolute;
-    left: 200px;
-    top: 55px;
+    grid-column: 4;
+    margin-top: 17px;
     cursor: pointer;
+    grid-row: 1;
 }
 
 .no-drag {
@@ -187,13 +212,6 @@ html{
     user-select:none;
 }
 
-#help{
-    text-decoration: none;
-    position: absolute;
-    top: 55px;
-    left: 1100px;
-}
-
 #help #manual{
     display: none;
 }
@@ -202,17 +220,19 @@ html{
     display: inline-block;
 }
 
-#add>a {
-    text-decoration: none;
-    position: absolute;
-    top: 55px;
-    left: 900px;
+#add {
+    grid-column: 19;
+    grid-row: 1;
 }
 
 #drop {
-    position: absolute;
-    top: 55px;
-    left: 1000px;
+    grid-column: 21;
+    grid-row: 1;
+}
+
+#help{
+    grid-column: 23;   
+    grid-row: 1;
 }
 
 #manual {

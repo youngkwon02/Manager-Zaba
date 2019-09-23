@@ -17,7 +17,6 @@ $(document).ready(function(){
             success: function(data) {
                 // JSON data Parsing
                 var result = JSON.parse(data);
-
                 // result display controll]
                 if(result.index > 0){
                     if(text === ''){
@@ -49,9 +48,18 @@ $(document).ready(function(){
                     var resultNick = 'Nickname : '+result.result0[3];
                     $('#result_nick').html(resultNick);
 
-                    // Send friend request
-                    var sendButton = '<img onclick="sendFriendRequest()" src="./images/friendly.png" style="width: 50px; height: 50px">'
-                    $('#sendRequest').html(sendButton);
+                    if(result.result0[4] === 'NotFriend'){
+                        // Send friend request
+                        var sendButton = '<img onclick="sendFriendRequest()" src="./images/friendly.png" style="width: 50px; height: 50px">'
+                        $('#sendRequest').html(sendButton);
+                        $('#deleteFriend').html('');
+                    }else if(result.result0[4] === 'AlreadyFriend'){
+                        // Delete friend relation
+                        var deleteButton = '<img onclick="deleteFriend(\''+result.result0[0]+'\')" src="./images/drop.png" style="width: 50px; height: 50px">'
+                        $('#deleteFriend').html(deleteButton);
+                        $('#sendRequest').html('');
+                    }
+                    
                 }else{
                     document.getElementById('result').style.display = 'none';
                 }
@@ -87,4 +95,8 @@ function sendFriendRequest(){
         responserEmail = responserEmail.substring(9, responserEmail.length);
         window.location.href = "./sendFriendRequestAction.php?responserEmail="+responserEmail;
     }
+}
+
+function deleteFriend(deleteEmail){
+    window.location.href = "./deleteFriendAction.php?deleteEmail="+deleteEmail+"&direction=friendManagement.php";
 }

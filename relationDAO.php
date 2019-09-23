@@ -85,5 +85,62 @@
             $query = "UPDATE pending_relation SET accept_YN = 'C' WHERE requester_email = '".$requester."' AND responser_email = '".$responser."'";
             mysqli_query($db_connect, $query);
         }
+
+        function checkRelation($owner_email, $check_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "SELECT relation_seq FROM relation WHERE (first_user_email = '".$owner_email."' AND second_user_email = '".$check_email."') OR (first_user_email = '".$check_email."' AND second_user_email = '".$owner_email."')";
+            $result = mysqli_query($db_connect, $query);
+            $row = mysqli_fetch_array($result);
+            if($row[0] === null){
+                return 'NotFriend';
+            }else{
+                return 'AlreadyFriend';
+            }
+        }
+
+        function deleteFriend($owner_email, $delete_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "DELETE FROM relation WHERE (first_user_email = '".$owner_email."' AND second_user_email = '".$delete_email."') OR (first_user_email = '".$delete_email."' AND second_user_email = '".$owner_email."')";
+            mysqli_query($db_connect, $query);
+        }
+
+        function getListOfAllFriends($owner_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "SELECT IF((first_user_email = '".$owner_email."'), second_user_email, first_user_email) FROM relation WHERE (first_user_email = '".$owner_email."' OR second_user_email = '".$owner_email."')";
+            $result = mysqli_query($db_connect, $query);
+            return $result;
+        }
+
+        function getListOfRecentFriends($owner_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $d = strtotime("-2 Weeks");
+            $date = date("Y-m-d", $d);
+            $query = "SELECT IF((first_user_email = '".$owner_email."'), second_user_email, first_user_email) FROM relation WHERE (first_user_email = '".$owner_email."' OR second_user_email = '".$owner_email."') AND since >= '".$date."'";
+            $result = mysqli_query($db_connect, $query);
+            return $result;
+        }
+
+        function friendListSort($friendArr){
+            // frinedArr는 2d array일 것.
+            // Form : frindArr[friendNum(Just index)][email or name]
+            // Sort by friendArr[][name]
+            
+            $returnArr = $friendArr;
+            for($i=0; $i<count($returnArr); $i++){
+                for($k=$i+1; $k<count($returnArr); $k++){
+                    if($returnArr[$i]['name']>$returnArr[$k]['name']){
+                        $tempEmail = $returnArr[$k]['email'];
+                        $tempName = $returnArr[$k]['name'];
+
+                        $returnArr[$k]['email'] = $returnArr[$i]['email'];
+                        $returnArr[$k]['name'] = $returnArr[$i]['name'];
+
+                        $returnArr[$i]['email'] = $tempEmail;
+                        $returnArr[$i]['name'] = $tempName;
+                    }
+                }
+            }
+            return $returnArr;
+        }
     }
 ?>

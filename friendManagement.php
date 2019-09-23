@@ -38,6 +38,17 @@
             }</script>');
             $_SESSION['send_Request'] = null;
         }
+
+        if($_SESSION['deleteFriend'] != null){
+            $message = $_SESSION['deleteFriend']."님과의 친구관계를 삭제했습니다.";
+
+            echo('<script>window.onload = function(){
+                setTimeout(function(){
+                    alert("'.$message.'");
+                }, 200);
+            }</script>');
+            $_SESSION['deleteFriend'] = null;
+        }
     ?>
 
     <?php
@@ -58,6 +69,7 @@
             <div id="result_birth"></div>
             <div id="result_nick"></div>
             <div id="sendRequest"></div>
+            <div id="deleteFriend"></div>
         </div>
     </div>
 </body>
