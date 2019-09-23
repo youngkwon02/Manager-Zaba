@@ -35,7 +35,7 @@
     <div id="menuTab">
         <ul>
             <li><a href="./friendList.php">Friend List</a></li>
-            <li><a href="./friendManagement.php">Friend management</a></li>
+            <li><a href="./friendManagement.php">Friend Search</a></li>
             <li><a href="./modifyInfo.php">Modify Info</a></li>
             <li><a href="./signoutAction.php">Sign Out</a></li>
         </ul>
@@ -158,9 +158,12 @@
                     <?php
                         require './initCalendar.php';
                         require './calendarDAO.php';
+                        require './relationDAO.php';
                         $user_email = $userDAO->get_userEmail($_SESSION['user_name']);
                         $calendarDAO = new calendarDAO();
-                        $date_arr = $calendarDAO->get_date($user_email, $now_Y, $now_M);
+                        $relationDAO = new relationDAO();
+                        $allFriendsList = $relationDAO->getAllFriendsList($user_email);
+                        $date_arr = $calendarDAO->get_date($user_email, $allFriendsList, $now_Y, $now_M);
                         $index = count($date_arr);
 
                     //  일자 출력 .. 1 ~ 31 ..

@@ -221,17 +221,17 @@ html{
 }
 
 #add {
-    grid-column: 19;
+    grid-column: 18;
     grid-row: 1;
 }
 
 #drop {
-    grid-column: 21;
+    grid-column: 20;
     grid-row: 1;
 }
 
 #help{
-    grid-column: 23;   
+    grid-column: 22;   
     grid-row: 1;
 }
 
@@ -240,8 +240,8 @@ html{
     width: 480px;
     height: 70px;
     position: absolute;
-    top: 70px;
-    left: -250px;
+    top: 85px;
+    left: 835px;
     font-size: 15px;
     padding-top: 20px;
     border-radius: 15px;

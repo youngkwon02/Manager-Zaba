@@ -38,13 +38,17 @@
                 // Bring date of calendar from Database
                 require 'userDAO.php';
                 require 'calendarDAO.php';
+                require 'relationDAO.php';
 
                 $userDAO = new userDAO();
                 $calendarDAO = new calendarDAO();
+                $relationDAO = new relationDAO();
                 $user_email = $userDAO->get_userEmail($_SESSION['user_name']);
+                $allFriendsList = $relationDAO->getAllFriendsList($user_email);
                 // date_arr is 2 dimensional array
                 // arr[rowNum][colName] format
-                $date_arr = $calendarDAO->get_date($user_email, $now_Y, $now_M);                
+                
+                $date_arr = $calendarDAO->get_date($user_email, $allFriendsList, $now_Y, $now_M);
             ?>
 
             <?php 
@@ -122,11 +126,27 @@
                                     break;
                                 }
                                 $title = $date_arr[$indexSet[$v]]['title'];
-                                if(strlen($title) > 15){
-                                    $title = substr($title, 0, 15);
-                                    $title = $title.' ..';
-                                }                                
-                                echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                $owner = $date_arr[$indexSet[$v]]['owner'];
+                                $owner = $userDAO->get_userName($owner);
+                                if(strlen($title) > 15){                                    
+                                    if($owner != $_SESSION['user_name']){
+                                        $title = substr($title, 0, 15);
+                                        $title = $title.' ..';
+                                        $title = $owner.' : '.$title;
+                                    }else{
+                                        $title = substr($title, 0, 15);
+                                        $title = $title.' ..';    
+                                    }
+                                }else{
+                                    if($owner != $_SESSION['user_name']){
+                                        $title = $owner.' : '.$title;
+                                    }
+                                }
+                                if($owner != $_SESSION['user_name']){
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$owner.' : '.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                }else{
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                }
                             }
                             echo('</div>');
                         }else{
@@ -144,11 +164,27 @@
                                     break;
                                 }
                                 $title = $date_arr[$indexSet[$v]]['title'];
-                                if(strlen($title) > 15){
-                                    $title = substr($title, 0, 15);
-                                    $title = $title.' ..';
+                                $owner = $date_arr[$indexSet[$v]]['owner'];
+                                $owner = $userDAO->get_userName($owner);
+                                if(strlen($title) > 15){                                    
+                                    if($owner != $_SESSION['user_name']){
+                                        $title = substr($title, 0, 15);
+                                        $title = $title.' ..';
+                                        $title = $owner.' : '.$title;
+                                    }else{
+                                        $title = substr($title, 0, 15);
+                                        $title = $title.' ..';    
+                                    }
+                                }else{
+                                    if($owner != $_SESSION['user_name']){
+                                        $title = $owner.' : '.$title;
+                                    }
                                 }
-                                echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                if($owner != $_SESSION['user_name']){
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$owner.' : '.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                }else{
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                }
                             }
                             echo('</div>');
                         }else{
@@ -166,11 +202,27 @@
                                     break;
                                 }
                                 $title = $date_arr[$indexSet[$v]]['title'];
-                                if(strlen($title) > 15){
-                                    $title = substr($title, 0, 15);
-                                    $title = $title.' ..';
+                                $owner = $date_arr[$indexSet[$v]]['owner'];
+                                $owner = $userDAO->get_userName($owner);
+                                if(strlen($title) > 15){                                    
+                                    if($owner != $_SESSION['user_name']){
+                                        $title = substr($title, 0, 15);
+                                        $title = $title.' ..';
+                                        $title = $owner.' : '.$title;
+                                    }else{
+                                        $title = substr($title, 0, 15);
+                                        $title = $title.' ..';    
+                                    }
+                                }else{
+                                    if($owner != $_SESSION['user_name']){
+                                        $title = $owner.' : '.$title;
+                                    }
                                 }
-                                echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                if($owner != $_SESSION['user_name']){
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$owner.' : '.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                }else{
+                                    echo('<div class="ele_date" id="'.$date_arr[$indexSet[$v]]['CAL_seq'].'" draggable="true" ondragstart="drag(event)" style="background-color: '.$date_arr[$indexSet[$v]]['color'].';"><span class="offMouse">'.$title.'</span><span class="onMouse">'.$date_arr[$indexSet[$v]]['title'].'</span></div>');
+                                }
                             }
                             echo('</div>');
                         }else{

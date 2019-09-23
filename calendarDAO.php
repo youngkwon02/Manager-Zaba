@@ -22,17 +22,19 @@
             mysqli_query($db_connect, $query);
         }
 
-        function get_date($user_email, $now_Y, $now_M) {
+        function get_date($user_email, $allFriendsList, $now_Y, $now_M) {
             $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+
             $search_start = $now_Y.'-'.($now_M-1).'-01';
             $search_end = $now_Y.'-'.($now_M+1).'-31';
-            $query = "SELECT CAL_seq, title, start_date, end_date, color FROM CALENDAR WHERE owner='".$user_email."' AND ( '".$search_end."' > start_date OR '".$search_start."' < end_date ) ORDER BY start_date and end_date and record_date";
+            $query = "SELECT CAL_seq, title, owner, start_date, end_date, color FROM CALENDAR WHERE ((owner = '".$user_email."') OR (owner IN ".$allFriendsList." AND share_YN='Y')) AND ( '".$search_end."' > start_date OR '".$search_start."' < end_date ) ORDER BY start_date and end_date and record_date";
             $result = mysqli_query($db_connect, $query);
             $returnArr;
             $index = 0;
             while($row = mysqli_fetch_assoc($result)){
                 $returnArr[$index]['CAL_seq'] = $row['CAL_seq'];
                 $returnArr[$index]['title'] = $row['title'];
+                $returnArr[$index]['owner'] = $row['owner'];
                 $returnArr[$index]['start_date'] = $row['start_date'];
                 $returnArr[$index]['end_date'] = $row['end_date'];
                 $returnArr[$index]['color'] = $row['color'];

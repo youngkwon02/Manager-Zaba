@@ -111,6 +111,20 @@
             return $result;
         }
 
+        function getAllFriendsList($owner_email){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "SELECT IF((first_user_email = '".$owner_email."'), second_user_email, first_user_email) FROM relation WHERE (first_user_email = '".$owner_email."' OR second_user_email = '".$owner_email."')";
+            $result = mysqli_query($db_connect, $query);
+
+            $row = mysqli_fetch_array($result);
+            $List = "('".$row[0]."'";
+            while($row = mysqli_fetch_array($result)){
+                $List = $List.", '".$row[0]."'";
+            }
+            $List = $List.")";
+            return $List;
+        }
+
         function getListOfRecentFriends($owner_email){
             $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
             $d = strtotime("-2 Weeks");
