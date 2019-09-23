@@ -2,7 +2,7 @@
 class userDAO {
     private static $db_host = "localhost";
     private static $db_user = "PUadmin";
-    private static $db_passwd = "rladudrnjs1102";
+    private static $db_passwd = "1234";
     private static $db_name = "Project_Unknown";
    
     function __construct() {
