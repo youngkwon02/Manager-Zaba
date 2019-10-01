@@ -60,7 +60,7 @@
     <div id="inner">
         <div id="waitingReceiveRequest"><a href="./waitingList.php">받은 요청 : <?= $receiveNum ?></a></div>
         <div id="waitingSendRequest"><a href="./waitingList.php">보낸 요청 : <?= $sendNum ?></a></div>
-        <div id="back"><a href="./home.php"><img src="./images/back.png"></a></div>
+        <div id="back"><a href="./home.php">←</a></div>
         <input id="searchBar" type="text" name="searchBar" value="Enter your friend's name or email!">
         <div id="result">
             <div id="result_num"></div>

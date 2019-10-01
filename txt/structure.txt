@@ -30,4 +30,8 @@ Relation
     친구 관계는 Friend Management에서 관리.
     기능은 Search bar에서 user_name(NOT NULL) search, using Ajax, express that user.
     차선책으로 Form으로 처리하는 방법이 있지만, 원하는 바는 Ajax이 맞는거같다.
-    
+    calendar_filter라는 일정 보임 filter column이 존재한다.
+    값은 N, Y, F, S가 존재하며, 서로가 보이지 않게 하면 Y, 서로가 보이게 하면 N,
+    first_usre_email에 해당하는 사람이 second_user_email에 해당하는 사람의 일정을 보지 않기를 원한다면 F,
+    반대의 경우 S이다.
+    이를 통해서 calendarFilter column을 하나만 만들어서 작동하게 할 수 있었다.

@@ -45,7 +45,12 @@ $(document).ready(function(){
                             var inner = '<div class="eleImg">'+firstName+'</div>';
                             inner += '<div class="eleName">'+obj[i][1]+'</div>';
                             inner += '<div class="eleMail">'+obj[i][0]+'</div>';
-                            inner += '<div class="eleEtc">···</div>';
+                            if(obj[i][2] === 'N'){
+                                inner += '<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('+i+')">쪽지 보내기</div><div class="noExpress" onclick="setCalendarFilter('+i+')">일정 표시 안함</div><div class="deleteFriend" onclick="deleteFriend('+i+')">친구 삭제</div></div>';
+                            }else{
+                                inner += '<div class="eleFunc"><div class="sendMessage" onclick="sendMessage('+i+')">쪽지 보내기</div><div class="noExpress" onclick="removeCalendarFilter('+i+')">일정 표시하기</div><div class="deleteFriend" onclick="deleteFriend('+i+')">친구 삭제</div></div>';
+                            }
+                            inner += '<div class="eleEtc" onclick="etcFunc('+i+')">···</div>';
                             listEle[i].innerHTML = inner
                         }
                     }
@@ -110,6 +115,8 @@ function etcFunc(eleIndex){
 }
 
 function sendMessage(eleIndex){
+    var targetEmail = document.getElementsByClassName('eleMail')[eleIndex].innerText;
+    window.location.href = "./messageWriteToFriend.php?targetEmail="+targetEmail;
 
 }
 

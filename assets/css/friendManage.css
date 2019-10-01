@@ -195,11 +195,24 @@ ol {
 
 #back {
     grid-row: 2;
-    grid-column: 3;
-    background-color: rgba(255, 255, 255, 0.13);
+    grid-column: 5;
+    font-size: 2em;
+    font-weight: bold;
 }
 
-#back>a>img {
-    width: 65px;
-    height: 75px;
+#back>a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, .75);
+}
+
+#backToManage{
+    font-size: 2em;
+    grid-row: 2;
+    grid-column: 1;
+    padding-left: 50px;
+}
+
+#backToManage>a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, .75);
 }

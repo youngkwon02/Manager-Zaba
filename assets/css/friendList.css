@@ -33,6 +33,19 @@ h2>a{
     grid-column-end: 19;
 }
 
+#notice {
+    padding-top: 7px;
+    padding-left: 93px;
+    border-top: 1px solid rgba(0, 0, 0, .3);
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 19;
+    color: red;
+}
+
+
 #category>span{
     display: inline-block;
     text-align: center;

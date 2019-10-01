@@ -37,7 +37,8 @@
     }
 ?>
 <body>
-    <div id="listBoard">
+        <div id="listBoard">
+        <span id="backToManage"><a href="./friendManagement.php">←</a></span>
         <h1 id="receiveTitle">받은 친구요청</h1>
         <h1 id="sendTitle">대기중인 친구요청</h1>
         <div id="receiveList">

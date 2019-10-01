@@ -43,7 +43,8 @@
         ?>
         <ul>
             <li><a href="./friendList.php">Friend List</a></li>
-            <li><a href="./friendManagement.php">Friend Search</a><?php if($receiveNum != 0){echo('<span style="font-weight: bold; color: red; font-size: 20px;">!</span>');} ?></li>
+            <li><a href="./friendManagement.php">Friend Search</a><?php if($receiveNum != 0){echo('<span style="font-weight: bold; color: red; font-size: 20px;">&nbsp;&nbsp;!</span>');} ?></li>
+            <li><a href="./message.php">Message</a></li>
             <li><a href="./modifyInfo.php">Modify Info</a></li>
             <li><a href="./signoutAction.php">Sign Out</a></li>
         </ul>
@@ -117,9 +118,9 @@
                 }else if($_GET['memo_Ex'] == 2) {
                     echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Text is too long (UP TO 300 characters)</h4>');
                 }else if($_GET['memo_Ex'] == 3) {
-                    echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Title contains semi-colon!</h4>');
+                    echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Title contains unexpected character!</h4>');
                 }else if($_GET['memo_Ex'] == 4) {
-                    echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Text contains Semi-colon!</h4>');
+                    echo('<h4 style="text-align:center; color:red; margin:0; grid-row:1; grid-column-start:16; grid-column-end:28;">MEMO Text contains unexpected character!</h4>');
                 }
             ?>
 
