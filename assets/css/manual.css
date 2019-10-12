@@ -1,0 +1,91 @@
+header{
+    display: grid;
+    grid-template-columns: 30px;
+    border-bottom: 2px solid black;
+}
+
+#back{
+    margin-left: 15px;    
+    margin-top: 20px;
+    grid-column: 1;
+}
+
+#back>a{
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+}
+
+h1{
+    grid-column: 2;
+    padding-bottom: 15px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+#nav>ul{
+    margin-top: 0;
+    padding-top: 15px;
+    padding-left: 0;
+    padding-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.navList{
+    display: inline-block;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.navListSelected{
+    display: inline-block;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: deepskyblue;
+}
+
+#inner{
+    width: 1424px;
+    height: 530px;
+
+    display: grid;
+    grid-template-columns: 30px 1364px 30px;
+}
+
+#content{
+    border: 2px solid lightcoral;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: 700px 660px;
+}
+
+#contentText{
+    padding: 10px;
+}
+
+#contentText>h3{
+    text-align: center;
+}
+
+#contentText>p{
+    margin-top: 50px;
+}
+
+.pageMove{
+    display: grid;
+    grid-template-rows: 240px 50px 240px;
+    text-align: center;
+}
+
+.pageMoveButton{
+    grid-row: 2;
+    margin: auto;
+    font-size: 30px;
+    color: rgba(0, 0, 0, .85);
+    cursor: pointer;
+}

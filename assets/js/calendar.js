@@ -1,80 +1,12 @@
 $(document).ready(function(){
-    //For moving by nav bar
-    document.getElementsByTagName('html')[0].style.scrollBehavior = '';
-
     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
-        window.location.href="./unaccessible_mobile.php";
+        console.log("Mobile");
     }
-    var hello_top = 0;
-    var todo_top = $('#todo').offset().top;
-    var memo_top = $('#memo').offset().top;
-    var calendar_top = $('#calendar').offset().top;
-    var navEle = document.getElementsByClassName('navli');
-    navEle[0].style.color = 'rgba(255, 255, 255, 1)';
-    navEle[0].style.fontWeight = 'bold';
-    $(document).scroll(function(){
-        var scrollPos = $(document).scrollTop() + 80; //Because navbar height
-        if(scrollPos >= hello_top && scrollPos < todo_top-1){
-            for(var k = 0; k < navEle.length; k++){
-                navEle[k].style.color = 'rgba(255, 255, 255, .65)';
-                navEle[k].style.fontWeight = '';
-                if(k === 0){
-                    navEle[k].style.color = 'rgb(255, 255, 255)';
-                    navEle[k].style.fontWeight = 'bold';
-                }
-            }
-        }else if (scrollPos >= todo_top-1 && scrollPos < memo_top) {
-            for(var k = 0; k < navEle.length; k++){
-                navEle[k].style.color = 'rgba(255, 255, 255, .65)';
-                navEle[k].style.fontWeight = '';
-                if(k === 1){
-                    navEle[k].style.color = 'rgb(255, 255, 255)';
-                    navEle[k].style.fontWeight = 'bold';
-                }
-            }
-        }else if (scrollPos >= memo_top-1 && scrollPos < calendar_top) {
-            for(var k = 0; k < navEle.length; k++){
-                navEle[k].style.color = 'rgba(255, 255, 255, .65)';
-                navEle[k].style.fontWeight = '';
-                if(k === 2){
-                    navEle[k].style.color = 'rgb(255, 255, 255)';
-                    navEle[k].style.fontWeight = 'bold';
-                }
-            }
-        }else if (scrollPos >= calendar_top) {
-            for(var k = 0; k < navEle.length; k++){
-                navEle[k].style.color = 'rgba(255, 255, 255, .65)';
-                navEle[k].style.fontWeight = '';
-                if(k === 3){
-                    navEle[k].style.color = 'rgb(255, 255, 255)';
-                    navEle[k].style.fontWeight = 'bold';
-                }
-            }
-        }
-    })
 
 
-// These are function for home.php
-    $('#prev_m').click(function(){
-        window.location.href = './calendarAction.php?action=prevM';
-    });
 
-    $('#next_m').click(function(){
-        window.location.href = './calendarAction.php?action=nextM';
-    });
 
-    $('#prev_y').click(function(){
-        window.location.href = './calendarAction.php?action=prevY';
-    });
-
-    $('#next_y').click(function(){
-        window.location.href = './calendarAction.php?action=nextY';
-    });
-
-    $('#today').click(function(){
-        window.location.href = './calendarAction.php?action=reset'
-    });
 // ----------------------------------------------------------------------
 // These are function for manageCalendar.php
     $('#prev_M').click(function(){
@@ -274,7 +206,7 @@ $(document).ready(function(){
         var filter = document.getElementById('calendarFilter');
         filter.style.display = 'block';
     })
-});
+})
 
 function click_menu(x){
     x.classList.toggle("change");
@@ -364,6 +296,5 @@ function navMove(sec){
         navEle[k].style.color = 'rgba(255, 255, 255, .65)';
         navEle[k].style.fontWeight = '';
     }
-    document.getElementsByTagName('html')[0].style.scrollBehavior = 'smooth';
     window.location.href = './home.php#'+sec;
 }

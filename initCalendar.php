@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $dayArr = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+    $dayArr = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     $monthArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     $yearArr = [];
     $present_Y = date('Y', time());
@@ -34,14 +34,16 @@
         
     
         // $startDayNum = 6; //이번달의 시작 요일 0 to 6
-        $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y))-1;
-        if($startDayNum == -1) {
-            $startDayNum = 6;
-        }
-        $todayNum = date('w', time()) - 1; //NOW $startDayNum is num in 0 to 6, 오늘의 요일
-        if($todayNum == -1) {
-            $todayNum = 6;
-        }
+        // $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y))-1;
+         $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y));
+        // if($startDayNum == -1) {
+        //     $startDayNum = 6;
+        // }
+        //$todayNum = date('w', time()) - 1; //NOW $startDayNum is num in 0 to 6, 오늘의 요일
+        $todayNum = date('w', time());
+        // if($todayNum == -1) {
+        //     $todayNum = 6;
+        // }
         $today = $dayArr[$startDayNum]; //NOW $startDay is string in $dayArr
         
         // Only Here
@@ -73,14 +75,16 @@
         
 
          // $startDayNum = 6; //이번달의 시작 요일 0 to 6
-         $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y)) - 1;
-         if($startDayNum == -1) {
-             $startDayNum = 6;
-         }
-         $todayNum = date('w', time()) - 1; //NOW $startDayNum is num in 0 to 6, 오늘의 요일
-         if($todayNum == -1) {
-             $todayNum = 6;
-         }
+        //  $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y)) - 1;
+        $startDayNum = date('w', mktime(12, 0, 0, $now_M, 1, $now_Y));
+        //  if($startDayNum == -1) {
+        //      $startDayNum = 6;
+        //  }
+         //$todayNum = date('w', time()) - 1; //NOW $startDayNum is num in 0 to 6, 오늘의 요일
+         $todayNum = date('w', time()); //NOW $startDayNum is num in 0 to 6, 오늘의 요일
+        //  if($todayNum == -1) {
+        //      $todayNum = 6;
+        //  }
          $today = $dayArr[$startDayNum]; //NOW $startDay is string in $dayArr
     }
 ?>

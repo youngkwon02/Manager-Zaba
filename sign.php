@@ -50,6 +50,16 @@
             }</script>');
             $_SESSION['loginERR'] = null;
         }
+
+        if($_SESSION['messageAccessWrong'] != null){
+            $message = "잘못된 접근입니다.";
+            echo('<script>window.onload = function(){
+                setTimeout(function(){
+                    alert("'.$message.'");
+                }, 200);
+            }</script>');
+            $_SESSION['messageAccessWrong'] = null;
+        }
     ?>
     <div id = "div_signup_form">
         <h2>Sign up</h2><br>  

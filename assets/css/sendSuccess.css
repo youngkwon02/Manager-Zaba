@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    background-color: rgb(200, 125, 233);
+    transition-duration: 1s;
+}
+
+#inner{
+    width: 400px;
+    height: 500px;
+    background-color: bisque;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 9px;
+}
+
+h1{
+    text-align: center;
+    padding-top: 30px;
+}
+
+p{
+    text-align: center;
+}
+
+input{
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(97, 176, 241);
+    width: 90px;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, .7);
+}
+
+img{
+    width: 80px;
+    height: 80px;
+}

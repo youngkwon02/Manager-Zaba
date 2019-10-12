@@ -42,5 +42,4 @@
         $messageDAO->toggleImportant($user_email, $target, $selected);
     }
     header('location: message.php');
-
 ?>

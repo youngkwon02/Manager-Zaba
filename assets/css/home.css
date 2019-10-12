@@ -48,12 +48,22 @@ body {
 }
 
 #slidebar>.inner>nav>ul>li {
-    margin-left: 2em;
-    color: rgba(255, 255, 255, 0.65);
+    margin-left: 2em;    
+    text-decoration: none;
+    color: rgba(255, 255, 255, .65);
+    transition: color .7s;
     /* background-image: linear-gradient(to right, #5e42a6, #b74e91); */
 }
 
+#slidebar>.inner>nav>ul>li:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
 #slidebar>.inner>nav>ul>li:first-child{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 1);
+    transition: color .7s;
     margin-left: 0;
 }
 

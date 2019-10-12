@@ -117,7 +117,6 @@ function etcFunc(eleIndex){
 function sendMessage(eleIndex){
     var targetEmail = document.getElementsByClassName('eleMail')[eleIndex].innerText;
     window.location.href = "./messageWriteToFriend.php?targetEmail="+targetEmail;
-
 }
 
 function setCalendarFilter(eleIndex){

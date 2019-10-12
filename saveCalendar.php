@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./assets/js/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/home.js"></script>
+    <script src="./assets/js/calendar.js"></script>
     <link rel="stylesheet" href="./assets/css/saveCalendar.css">
     <title>Add your event!</title>
 </head>

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./assets/js/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/home.js"></script>
+    <script src="./assets/js/calendar.js"></script>
     <link rel="stylesheet" href="./assets/css/calendar.css">
     <title>Calendar Management</title>
 </head>
@@ -24,9 +24,9 @@
         <div class="calendarBody">            
             <?php
                 for($i=0; $i<7; $i++) {
-                    if($i == 5){
+                    if($i == 6){
                         echo('<div id="Saturday" class="calendarDay">'.$dayArr[$i].'</div>');
-                    }else if($i == 6){
+                    }else if($i == 0){
                         echo('<div id="Sunday" class="calendarDay">'.$dayArr[$i].'</div>');
                     }else{
                         echo('<div class="calendarDay">'.$dayArr[$i].'</div>');
@@ -58,6 +58,10 @@
 
             <?php 
                 $year = $now_Y;
+
+                if(substr($now_D, 0, 1) === '0'){
+                    $now_D = substr($now_D, 1, 1);
+                } 
                 $M = $now_M-1; //$M is for express the prev and next month's days
                 if($M == 0){
                     $M = 12;
@@ -133,13 +137,13 @@
                                 $title = $date_arr[$indexSet[$v]]['title'];
                                 $owner = $date_arr[$indexSet[$v]]['owner'];
                                 $owner = $userDAO->get_userName($owner);
-                                if(strlen($title) > 15){                                    
+                                if(mb_strlen($title, 'utf-8') > 9){                                    
                                     if($owner != $_SESSION['user_name']){
-                                        $title = substr($title, 0, 15);
+                                        $title = mb_substr($title, 0, 9, 'utf-8');
                                         $title = $title.' ..';
                                         $title = $owner.' : '.$title;
                                     }else{
-                                        $title = substr($title, 0, 15);
+                                        $title = mb_substr($title, 0, 9, 'utf-8');
                                         $title = $title.' ..';    
                                     }
                                 }else{
@@ -160,9 +164,17 @@
                     }else if($element === 'this') {
                         if($indexSet != null){
                             if(count($indexSet)>3){
-                                echo('<div class="calendarThisElement"><div class="ele_num">('.count($indexSet).')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
+                                if($day == $now_D){
+                                    echo('<div class="calendarThisElement" id="today"><div class="ele_num">('.count($indexSet).')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
+                                }else{    
+                                    echo('<div class="calendarThisElement"><div class="ele_num">('.count($indexSet).')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
+                                }
                             }else{
-                                echo('<div class="calendarThisElement"><div class="ele_num">'.$day.'</div>');
+                                if($day == $now_D){
+                                    echo('<div class="calendarThisElement" id="today"><div class="ele_num">'.$day.'</div>');
+                                }else{
+                                    echo('<div class="calendarThisElement"><div class="ele_num">'.$day.'</div>');
+                                }
                             }
                             for($v=0; $v<count($indexSet); $v++){
                                 if($v > 2){
@@ -171,13 +183,13 @@
                                 $title = $date_arr[$indexSet[$v]]['title'];
                                 $owner = $date_arr[$indexSet[$v]]['owner'];
                                 $owner = $userDAO->get_userName($owner);
-                                if(strlen($title) > 15){                                    
+                                if(mb_strlen($title, 'utf-8') > 9){                                    
                                     if($owner != $_SESSION['user_name']){
-                                        $title = substr($title, 0, 15);
+                                        $title = mb_substr($title, 0, 9, 'utf-8');
                                         $title = $title.' ..';
                                         $title = $owner.' : '.$title;
                                     }else{
-                                        $title = substr($title, 0, 15);
+                                        $title = mb_substr($title, 0, 9, 'utf-8');
                                         $title = $title.' ..';    
                                     }
                                 }else{
@@ -193,7 +205,11 @@
                             }
                             echo('</div>');
                         }else{
-                            echo('<div class="calendarThisElement"><div class="ele_num">'.$day.'</div></div>');
+                            if($day == $now_D){
+                                echo('<div class="calendarThisElement" id="today"><div class="ele_num">'.$day.'</div></div>');
+                            }else{
+                                echo('<div class="calendarThisElement"><div class="ele_num">'.$day.'</div></div>');
+                            }
                         }
                     }else if($element === 'next') {
                         if($indexSet != null){           
@@ -209,13 +225,13 @@
                                 $title = $date_arr[$indexSet[$v]]['title'];
                                 $owner = $date_arr[$indexSet[$v]]['owner'];
                                 $owner = $userDAO->get_userName($owner);
-                                if(strlen($title) > 15){                                    
+                                if(mb_strlen($title, 'utf-8') > 9){                                    
                                     if($owner != $_SESSION['user_name']){
-                                        $title = substr($title, 0, 15);
+                                        $title = mb_substr($title, 0, 9, 'utf-8');
                                         $title = $title.' ..';
                                         $title = $owner.' : '.$title;
                                     }else{
-                                        $title = substr($title, 0, 15);
+                                        $title = mb_substr($title, 0, 9, 'utf-8');
                                         $title = $title.' ..';    
                                     }
                                 }else{

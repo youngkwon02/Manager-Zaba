@@ -41,7 +41,7 @@ class userDAO {
 
     function add_user($user_email, $user_passwd, $user_name, $user_birth) {
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
-        $query = "INSERT INTO user_info (user_email, user_passwd, user_name, user_birth, search_YN) values ('".$user_email."', MD5('".$user_passwd."'), '".$user_name."', '".$user_birth."', 'Y')";
+        $query = "INSERT INTO user_info (user_email, user_passwd, user_name, user_birth, search_YN, login_count) values ('".$user_email."', MD5('".$user_passwd."'), '".$user_name."', '".$user_birth."', 'Y', 0)";
         mysqli_query($db_connect, $query);
     }
 
@@ -63,9 +63,14 @@ class userDAO {
             return 'EMPTY';
         }
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        if(mysqli_connect_error() != null){
+            $err_message = "Failed to connect to MySQL: ".mysqli_connect_error();
+            return $err_message;
+        }
         $query = "SELECT user_email, user_passwd FROM user_info WHERE user_email = '".$user_email."'";
         $result = mysqli_query($db_connect, $query);
         $row = mysqli_fetch_assoc($result);
+        
         if($row == false){
             return 'NOID';
         }
@@ -73,6 +78,7 @@ class userDAO {
         $result = mysqli_query($db_connect, $query);
         $inpw_md5 = mysqli_fetch_row($result);
         if($inpw_md5[0] === $row['user_passwd']){
+            $counterUpdateQuery = "UPDATE user_info SET login_count = login_count+1 WHERE user_email = '".$user_email."'";
             return 'SUCCESS';
         } else {
             return 'INCORRECTPW';
@@ -119,6 +125,14 @@ class userDAO {
         $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
         $query = "UPDATE user_info SET search_YN = '".$search_YN."' WHERE user_email = '".$user_email."'";
         mysqli_query($db_connect, $query);
+    }
+
+    function get_searchYN($user_name){
+        $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+        $query = "SELECT search_YN FROM user_info WHERE user_name = '".$user_name."'";
+        $result = mysqli_query($db_connect, $query);
+        $row = mysqli_fetch_assoc($result);
+        return $row['search_YN'];
     }
 
     function get_userNick($user_email) {

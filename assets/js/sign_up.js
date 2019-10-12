@@ -1,4 +1,8 @@
 var sign_up = function() {
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+        window.location.href="./unaccessible_mobile.php";
+    }
     var signin = document.getElementById('sign_board');
     var signupForm = document.getElementById('div_signup_form');
     if(signin.style.display == 'none') {

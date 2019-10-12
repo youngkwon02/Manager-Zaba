@@ -47,12 +47,41 @@
         }
 
         function send_Message($receiver, $receiver_name, $writer, $writer_name, $title, $text){
-            
             // 줄바꿈 처리!!!
             $send_date = date('Y-m-d H:i:s', time());
             $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
             $query = "INSERT INTO MESSAGE(title, text, receiver_email, receiver_name, writer_email, writer_name, send_date, read_YN, receiver_Delete_YN, writer_Delete_YN, receiver_Important_YN, writer_Important_YN) VALUES('".$title."', '".$text."', '".$receiver."', '".$receiver_name."', '".$writer."', '".$writer_name."', '".$send_date."', 'N', 'N', 'N', 'N', 'N')";
             mysqli_query($db_connect, $query);
+        }
+
+        function messageAccessCheck($message_seq, $user_email, $user_name){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "SELECT message_seq FROM MESSAGE WHERE message_seq = '".$message_seq."' AND ((receiver_email='".$user_email."' AND receiver_name='".$user_name."') OR (writer_email='".$user_email."' AND writer_name='".$user_name."'))";
+            $result = mysqli_query($db_connect, $query);
+            $row = mysqli_fetch_array($result);
+            if($row[0] != null){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function read_Message($message_seq){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            // Update read_YN column value
+
+            $modifyReadYN = "UPDATE MESSAGE SET read_YN = 'Y' WHERE message_seq = '".$message_seq."' AND receiver_name = '".$_SESSION['user_name']."'";
+            mysqli_query($db_connect, $modifyReadYN);
+
+            // Update read_date column value
+            $read_date = date('Y-m-d H:i:s', time());
+            $modifyReadDate = "UPDATE MESSAGE SET read_date = '".$read_date."' WHERE (message_seq = '".$message_seq."' AND read_date IS NULL AND receiver_name = '".$_SESSION['user_name']."')";
+            mysqli_query($db_connect, $modifyReadDate);
+
+            // Take message data
+            $getMessage = "SELECT * FROM MESSAGE WHERE message_seq = '".$message_seq."'";
+            $result = mysqli_query($db_connect, $getMessage);
+            return $result;
         }
 
         function get_allMessage($owner_email){
@@ -311,6 +340,18 @@
                         break;
                     }
                 }
+            }
+        }
+
+        function existNewMessage($user_email, $user_name){
+            $db_connect = mysqli_connect(self::$db_host, self::$db_user, self::$db_passwd, self::$db_name);
+            $query = "SELECT message_seq FROM MESSAGE WHERE receiver_email = '".$user_email."' AND receiver_name = '".$user_name."' AND read_YN = 'N' AND receiver_Delete_YN = 'N'";
+            $result = mysqli_query($db_connect, $query);
+            $row = mysqli_fetch_array($result);
+            if($row != null){
+                return true;
+            }else{
+                return false;
             }
         }
     }   

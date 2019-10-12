@@ -31,9 +31,9 @@
     
     if($validate && $_SESSION['messageException'] === null){
         $messageDAO->send_Message($receiver, $receiver_name, $writer, $writer_name, $title, $text);
-        $_SESSION['sendSuccess'] = true;
+        $_SESSION['sendSuccess'] = $receiver_name;
+        header('location: sendMessageSuccess.php');
+    }else{
+        header('location: message.php');
     }
-    header('location: message.php');
-
-
 ?>

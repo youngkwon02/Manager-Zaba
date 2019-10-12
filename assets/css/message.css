@@ -121,7 +121,7 @@ body{
 
     border: none;
     border-radius: 5px;
-    margin-top: 25px;
+    margin-top: 40px;
     margin-left: 55px;
     background-color: rgba(0, 0, 0, 0.219);
     color: rgba(0, 0, 0, .75);
@@ -328,9 +328,14 @@ body{
     text-align: center;
 }
 
+.targetText{
+    cursor: pointer;
+}
+
 .content{
     grid-column-start: 15;
     grid-column-end: 28;
+    cursor: pointer; 
 }
 
 

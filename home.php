@@ -4,13 +4,17 @@
 <?php require 'todoDAO.php'; ?>
 <?php require 'memoDAO.php'; ?>
 <?php require 'relationDAO.php'; ?>
+<?php require 'messageDAO.php'; ?>
 <?php
-    if($_SESSION['user_name'] == null){
+    if($_SESSION['user_name'] === null){
         header('location: sign.php');
     }
+    $_SESSION['manualSection'] === 'HELLO';
+    $_SESSION['manualPage'] = 1;
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html id="html" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,9 +29,10 @@
         <div class="inner">
             <nav>
                 <ul>
-                    <li class="navli">TODO</li>
-                    <li class="navli">MEMO</li>
-                    <li class="navli">CALENDAR</li>
+                    <li class="navli" onclick="navMove('header')">HELLO</li>
+                    <li class="navli" onclick="navMove('todo')">TODO</li>
+                    <li class="navli" onclick="navMove('memo')">MEMO</li>
+                    <li class="navli" onclick="navMove('calendar')">CALENDAR</li>
                     <li onclick="click_menu(this)"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></li>
                 </ul>
             </nav>
@@ -37,16 +42,20 @@
         <?php
             $userDAO = new userDAO();
             $relationDAO = new relationDAO();
+            $messageDAO = new messageDAO();
 
             $user_email = $userDAO->get_userEmail($_SESSION['user_name']);
             $receiveNum = $relationDAO->getNumOfReceiveRequest($user_email);
+
+            $isThereNewMessage = $messageDAO->existNewMessage($user_email, $_SESSION['user_name']);
         ?>
         <ul>
             <li><a href="./friendList.php">Friend List</a></li>
             <li><a href="./friendManagement.php">Friend Search</a><?php if($receiveNum != 0){echo('<span style="font-weight: bold; color: red; font-size: 20px;">&nbsp;&nbsp;!</span>');} ?></li>
-            <li><a href="./message.php">Message</a></li>
+            <li><a href="./message.php">Message</a><?php if($isThereNewMessage != false){echo('<span style="font-weight: bold; color: red; font-size: 20px;">&nbsp;&nbsp;!</span>');} ?></li>
             <li><a href="./modifyInfo.php">Modify Info</a></li>
-            <li><a href="./signoutAction.php">Sign Out</a></li>
+            <li><a href="./manual.php">Help</a></li>
+            <li><a href="./signoutAction.php">Sign out</a></li>
         </ul>
     </div>
     <header id = "header">
@@ -156,9 +165,9 @@
                     <!-- 요일 출력 MON ~ SUN -->
                     <?php
                         for($i=0; $i<7; $i++) {
-                            if($i == 5){
+                            if($i == 6){
                                 echo('<div id="Saturday" class="calendarDay">'.$dayArr[$i].'</div>');
-                            }else if($i == 6){
+                            }else if($i == 0){
                                 echo('<div id="Sunday" class="calendarDay">'.$dayArr[$i].'</div>');
                             }else{
                                 echo('<div class="calendarDay">'.$dayArr[$i].'</div>');

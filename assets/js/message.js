@@ -20,6 +20,15 @@ $(document).ready(function(){
     });
 });
 
+function sendMessage(eleIndex){
+    var targetEmail = document.getElementsByClassName('target')[eleIndex-1].innerText;
+    window.location.href = "./messageWriteToFriend.php?targetEmail="+targetEmail;
+}
+
+function readMessage(messageSeq){
+    window.location.href="messageReadAction.php?messageSeq="+messageSeq;
+}
+
 function friendSearch(){
     window.location.href="./receiverSearch.php";
 }
@@ -32,18 +41,12 @@ function allMessageBox(){
     window.location.href="./allMessage.php";
 }
 
-function sendSuccess(){
-    setTimeout(function(){
-        alert('메시지가 성공적으로 전송되었습니다.');
-    }, 100);
-}
-
 function changeSelect(func){
     window.location.href="changeSelect.php?func="+func;
 }
 
 function selectDelete(page){
-    var conf = confirm("선택하신 편지를 삭제하시겠습니까?");
+    var conf = confirm("선택하신 편지를 삭제하시겠습니까?\n(상대방에게는 삭제되지 않습니다.)");
     if(conf === true){
         var targetBoxIndexArr = [];
         var checkboxNum = document.getElementsByClassName('checkbox');
@@ -134,4 +137,14 @@ function allRemove(){
 
 function toggleImportant(index){
     window.location.href="messageManagement.php?method=toggleImportant&target="+index;
+}
+
+function navigateTo(tab){
+    if(tab === 'mailBox'){
+        window.location.href="./allMessage.php";
+    }else if(tab === 'writeMessage'){
+        window.location.href="./writeMessage.php";
+    }else{
+        window.location.href="./home.php";
+    }
 }

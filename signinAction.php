@@ -6,6 +6,8 @@
     $in_pw = $_POST['user_passwd'];
     $userDAO = new userDAO();
     $result = $userDAO->login_action($in_em, $in_pw);
+
+    echo($result);
     if($result === 'SUCCESS') {
         $_SESSION['user_name'] = $userDAO->get_userName($in_em);
         header('location: home.php');

@@ -22,7 +22,7 @@
             <div id="back"><a href="./home.php">←</a></div>
             <div id="messageIcon"><a href="messageRedirect.php"><img src="./images/mail.png"></a></div>
             <div id="headerTitle">Project_Unknown Message</div>
-            <div id="searchBar"><input id="messageSearch" type="messageSearch" name="messageSearch" value="Search message"></div>
+            
         </section>
         <section id="tabBar">
             <input id="writeButton" type="button" value="+ 편지쓰기" onclick="writeMessage()">
@@ -34,10 +34,8 @@
         </section>
         <section id="content">
             <?php
-                if($_SESSION['sendSuccess'] === true){
-                    echo('<script>sendSuccess()</script>');
-                    $_SESSION['sendSuccess'] = null;
-                }
+                $_SESSION['sendSuccess'] = null;
+
                 if($_SESSION['page'] === null){
                     $_SESSION['page'] = 1;
                 }
@@ -100,6 +98,19 @@
                             $result = $messageDAO->get_allMessage($user_email);
                             $index = 0;
                             while($row = mysqli_fetch_assoc($result)){
+                                if(mb_strlen($row['title'], 'utf-8') > 15){
+                                    $row['title'] = mb_substr($row['title'], 0, 15, 'utf-8');
+                                    $row['title'] = $row['title'].'..';
+                                }else{
+                                    $row['title'] = mb_substr($row['title'], 0, 15, 'utf-8');
+                                }
+
+                                if(mb_strlen($row['text'], 'utf-8') > 15){
+                                    $row['text'] = mb_substr($row['text'], 0, 15, 'utf-8');
+                                    $row['text'] = $row['text'].'..';
+                                }else{
+                                    $row['text'] = mb_substr($row['text'], 0, 15, 'utf-8');
+                                }
                                 $index++;
                                 if($_SESSION['page']*20<$index || $index<=($_SESSION['page'] - 1)*20){
                                     continue;
@@ -123,12 +134,12 @@
                                         }
 
                                         if($row['receiver_email'] === $user_email){
-                                            echo('<div class="target">'.$row['writer_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                         }else{
-                                            echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                         }
 
-                                        echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                        echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                         echo('<div class="timeStamp">'.$row['send_date'].'</div>');
                                     echo('</div>');
                                 }else{
@@ -150,12 +161,12 @@
                                         }
 
                                         if($row['receiver_email'] === $user_email){
-                                            echo('<div class="target">'.$row['writer_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                         }else{
-                                            echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                         }
 
-                                        echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                        echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                         echo('<div class="timeStamp">'.$row['send_date'].'</div>');
                                     echo('</div>');
                                 }
@@ -221,12 +232,12 @@
                                         }
 
                                         if($row['receiver_email'] === $user_email){
-                                            echo('<div class="target">'.$row['writer_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                         }else{
-                                            echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                         }
 
-                                        echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                        echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                         echo('<div class="timeStamp">'.$row['send_date'].'</div>');
                                     echo('</div>');
                                 }else{
@@ -248,12 +259,12 @@
                                         }
 
                                         if($row['receiver_email'] === $user_email){
-                                            echo('<div class="target">'.$row['writer_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                         }else{
-                                            echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                            echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                         }
 
-                                        echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                        echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                         echo('<div class="timeStamp">'.$row['send_date'].'</div>');
                                     echo('</div>');
                                 }
@@ -319,12 +330,12 @@
                                                 }
         
                                                 if($row['receiver_email'] === $user_email){
-                                                    echo('<div class="target">'.$row['writer_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                                 }else{
-                                                    echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                                 }
         
-                                                echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                                echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                                 echo('<div class="timeStamp">'.$row['send_date'].'</div>');        
                                             echo('</div>');
                                         }else{
@@ -346,12 +357,12 @@
                                                 }
         
                                                 if($row['receiver_email'] === $user_email){
-                                                    echo('<div class="target">'.$row['writer_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                                 }else{
-                                                    echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                                 }
         
-                                                echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                                echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                                 echo('<div class="timeStamp">'.$row['send_date'].'</div>');        
                                             echo('</div>');
                                         }
@@ -417,12 +428,12 @@
                                                 }
         
                                                 if($row['receiver_email'] === $user_email){
-                                                    echo('<div class="target">'.$row['writer_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                                 }else{
-                                                    echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                                 }
         
-                                                echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                                echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                                 echo('<div class="timeStamp">'.$row['send_date'].'</div>');        
                                             echo('</div>');
                                         }else{
@@ -444,12 +455,12 @@
                                                 }
         
                                                 if($row['receiver_email'] === $user_email){
-                                                    echo('<div class="target">'.$row['writer_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                                 }else{
-                                                    echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                                 }
         
-                                                echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                                echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                                 echo('<div class="timeStamp">'.$row['send_date'].'</div>');        
                                             echo('</div>');
                                         }
@@ -515,12 +526,12 @@
                                                 }
         
                                                 if($row['receiver_email'] === $user_email){
-                                                    echo('<div class="target">'.$row['writer_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                                 }else{
-                                                    echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                                 }
         
-                                                echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                                echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                                 echo('<div class="timeStamp">'.$row['send_date'].'</div>');        
                                             echo('</div>');
                                         }else{
@@ -542,12 +553,12 @@
                                                 }
         
                                                 if($row['receiver_email'] === $user_email){
-                                                    echo('<div class="target">'.$row['writer_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['writer_email'].'</span></div>');
                                                 }else{
-                                                    echo('<div class="target">'.$row['receiver_email'].'</div>');
+                                                    echo('<div class="target"><span class="targetText" onclick="sendMessage('.$index.')">'.$row['receiver_email'].'</span></div>');
                                                 }
         
-                                                echo('<div class="content">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
+                                                echo('<div class="content" onclick="readMessage('.$row['message_seq'].')">제목 : '.$row['title'].'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;내용 : '.$row['text'].'</div>');
                                                 echo('<div class="timeStamp">'.$row['send_date'].'</div>');        
                                             echo('</div>');
                                         }
