@@ -21,7 +21,7 @@
         <section id="header">
             <div id="back"><a href="./home.php">←</a></div>
             <div id="messageIcon"><a href="messageRedirect.php"><img src="./images/mail.png"></a></div>
-            <div id="headerTitle">Project_Unknown Message</div>
+            <div id="headerTitle">Zaba Message Box</div>
             
         </section>
         <section id="tabBar">

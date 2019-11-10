@@ -101,6 +101,7 @@ body {
 
 #sign_up:hover {
     color: rgb(30, 219, 131);
+    transition-duration: .5s;
     cursor: pointer;
 }
 

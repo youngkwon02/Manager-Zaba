@@ -12,8 +12,8 @@
 <body>
     <div id = "sign_board">
         <div id = "Welcome_Message">
-            <h2>Project_Unknown</h2>
-            <h5>Welcome to Project_Unknown!</h5>
+            <h2>Zaba, your own manager</h2>
+            <h5>Welcome to Manager Zaba!</h5>
         </div>
         <div id = "div_signin_form">
             <form method = "POST" action = "./signinAction.php">

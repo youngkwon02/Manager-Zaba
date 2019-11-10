@@ -18,7 +18,7 @@
 <body>
 <header>
     <div id="back"><a href="./home.php">←</a></div>
-    <h1>Project_Unknown Manual</h1>
+    <h1>Manager Zaba Manual</h1>
 </header>
     <div id="nav">
         <ul>

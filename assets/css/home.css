@@ -102,15 +102,12 @@ body {
 #menuTab {
     display: none;
     position: fixed;
-    left: 86%;
+    left: 85%;
     top: 80px;
     background-color: rgb(218, 150, 250);
     width: 28%;
     height: 100%;
-}
-
-#menuTab>ul{
-    padding-inline-start: 15px;
+    border-left: black 2px solid;
 }
 
 #menuTab>ul>li{

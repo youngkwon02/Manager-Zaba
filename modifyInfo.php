@@ -35,8 +35,7 @@
                 ?>            
             </h3>
             <h3>Password : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input" type="password" name="pass"></h3>
-            <h3>Password Check : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input" type="password" name="passck"></h3>
-            <h5>비밀번호 변경을 원하지 않으시면 Password, Password Check는 빈칸으로 두시면 됩니다.</h5>
+            <h3>Password Check : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input" type="password" name="passck"></h3><br><br>
             <?php 
                 if($_GET['error'] == 1) {
                     echo '<h4>Your nickname is too long!</h4>'; echo '<h4>English is up to 20 characters, Korean is up to 6 characters.</h4>';
