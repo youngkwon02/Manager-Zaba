@@ -51,7 +51,6 @@
                     $date_arr = $calendarDAO->get_myDate($user_email, $now_Y, $now_M);
                 }else{
                     // filter = all or null
-                    //@FIXME: Access DB with now_Y
                     $date_arr = $calendarDAO->get_allDate($user_email, $allFriendsList, $now_Y, $now_M);
                     echo("<script>console.log(".$now_Y.")</script>");
                     echo("<script>console.log(".$now_M.")</script>");
@@ -132,7 +131,7 @@
                             if(count($indexSet)>3){
                                 echo('<div class="calendarPrevElement"><div class="ele_num">('.count($indexSet).')&nbsp;&nbsp;&nbsp;&nbsp;'.$day.'</div>');
                             }else{
-                                echo('<div class="calendarPrevElement"><div class="ele_num">'.$month.$day.'</div>');
+                                echo('<div class="calendarPrevElement"><div class="ele_num">'.$day.'</div>');
                             }
                             for($v=0; $v<count($indexSet); $v++){
                                 if($v > 2){
