@@ -7,3 +7,4 @@ Schedule management service for group users
 - D-Day
 - Message
 - Sharing calender
+- User searching
