@@ -1,5 +1,5 @@
 # Manager-Zaba
-Schedule management service for group users
+Schedule management service for group members
 
 ---
 ## Function
