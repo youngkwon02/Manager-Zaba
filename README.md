@@ -1,5 +1,6 @@
 # Manager-Zaba
 Schedule management service for group members
+- Implemented by PHP
 
 ---
 ## Function
