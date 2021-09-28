@@ -3,7 +3,7 @@ Schedule management service for group members
 - Implemented by PHP
 
 ---
-## Function
+## Feature
 - Memo
 - D-Day
 - Message
